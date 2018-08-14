@@ -57,7 +57,7 @@ pipeline {
     steps {
       echo "------------>Build<------------"
       //Construir sin tarea test que se ejecutó previamente
-      sh 'gradle --b ./build.gradle build -x test'      
+      sh 'gradle --b ./api-rest/build.gradle build -x test'      
     }    
   }  
 
