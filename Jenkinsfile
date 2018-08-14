@@ -53,6 +53,14 @@ pipeline {
       }    
     }        
 
+  stage('Build') {      
+    steps {
+      echo "------------>Build<------------"
+      //Construir sin tarea test que se ejecutó previamente
+      sh 'gradle --b ./api-rest/build.gradle build -x test'      
+    }    
+  }
+
 stage('Static Code Analysis') {
     steps
     {
@@ -61,14 +69,6 @@ stage('Static Code Analysis') {
 	   sh "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"             
         }     
     }
-  }
-
-  stage('Build') {      
-    steps {
-      echo "------------>Build<------------"
-      //Construir sin tarea test que se ejecutó previamente
-      sh 'gradle --b ./api-rest/build.gradle build -x test'      
-    }    
   }
 
 }
