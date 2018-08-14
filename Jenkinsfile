@@ -33,14 +33,14 @@ pipeline {
             steps{
                 echo "------------>Compile<------------"
                 //sh 'gradle clean /api-rest'
-		sh 'gradle --b ./api-rest/build.gradle compileJava'		  
+		sh 'gradle --b ./build.gradle compileJava'		  
             }
         }    
     
     stage('Unit Tests') {      
       steps{        
         echo "------------>Unit Tests<------------"      
-        sh 'gradle --b ./api-rest/build.gradle test'
+        sh 'gradle --b ./build.gradle test'
         //junit '**/build/test-results/test/*.xml' //aggregate test results - JUnit
 				//jacoco classPattern:'**/build/classes/java', execPattern:'**/build/jacoco/test.exec', sourcePattern:'**/src/main/java'
       }    
@@ -57,7 +57,7 @@ pipeline {
     steps {
       echo "------------>Build<------------"
       //Construir sin tarea test que se ejecutó previamente
-      sh 'gradle --b ./api-rest/build.gradle build -x test'      
+      sh 'gradle --b ./build.gradle build -x test'      
     }    
   }  
 
