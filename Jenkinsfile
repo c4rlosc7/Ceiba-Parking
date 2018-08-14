@@ -26,7 +26,6 @@ pipeline {
 	      checkout([$class: 'GitSCM', branches: [[name: '*/master']],
 			doGenerateSubmoduleConfigurations: false, extensions: [], gitTool:
 			'Git_Centos', submoduleCfg: [], userRemoteConfigs: [[credentialsId:'GitHub_c4rlosc7',url:'https://github.com/c4rlosc7/Ceiba-Parking']]])
-       sh 'gradle clean ./api-rest'
       }
     }
     
@@ -52,15 +51,7 @@ pipeline {
         echo "------------>Integration Tests<------------"  
         //sh 'gradle --b ./build.gradle integrationTest'
       }    
-    }
-       
-  stage('Build') {      
-    steps {
-      echo "------------>Build<------------"
-      //Construir sin tarea test que se ejecutó previamente
-      sh 'gradle --b ./api-rest/build.gradle build -x test'      
-    }    
-  }  
+    }        
 
 stage('Static Code Analysis') {
     steps
@@ -71,6 +62,15 @@ stage('Static Code Analysis') {
         }     
     }
   }
+
+  stage('Build') {      
+    steps {
+      echo "------------>Build<------------"
+      //Construir sin tarea test que se ejecutó previamente
+      sh 'gradle --b ./api-rest/build.gradle build -x test'      
+    }    
+  }
+
 }
 	
 post {    
