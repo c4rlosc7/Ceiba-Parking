@@ -26,6 +26,7 @@ pipeline {
 	      checkout([$class: 'GitSCM', branches: [[name: '*/master']],
 			doGenerateSubmoduleConfigurations: false, extensions: [], gitTool:
 			'Git_Centos', submoduleCfg: [], userRemoteConfigs: [[credentialsId:'GitHub_c4rlosc7',url:'https://github.com/c4rlosc7/Ceiba-Parking']]])
+       sh 'gradle ./api-rest clean'
       }
     }
     
