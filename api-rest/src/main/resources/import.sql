@@ -1,0 +1,1 @@
+INSERT INTO vehiculos(placa) VALUES('GDER-23');
