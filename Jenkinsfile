@@ -33,14 +33,14 @@ pipeline {
             steps{
                 echo "------------>Compile<------------"
                 sh 'gradle clean'
-		sh 'gradle --b ./build.gradle compileJava'		  
+		sh 'gradle --b ./api-rest/build.gradle compileJava'		  
             }
         }    
     
     stage('Unit Tests') {      
       steps{        
         echo "------------>Unit Tests<------------"      
-        sh 'gradle --b ./build.gradle test'
+        sh 'gradle --b ./api-rest/build.gradle test'
         //junit '**/build/test-results/test/*.xml' //aggregate test results - JUnit
 				//jacoco classPattern:'**/build/classes/java', execPattern:'**/build/jacoco/test.exec', sourcePattern:'**/src/main/java'
       }    
