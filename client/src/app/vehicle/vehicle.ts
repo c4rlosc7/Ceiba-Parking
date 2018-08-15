@@ -4,5 +4,6 @@ export class Vehicle {
     cilindraje: String;
     fechaIngreso: String;
     fechaSalida: String;
+    tipo: number;
     costo: String;    
 }

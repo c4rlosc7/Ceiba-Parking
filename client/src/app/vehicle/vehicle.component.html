@@ -11,7 +11,10 @@
     </div>
     <div class="col col-lg-2 bold">
       FECHA SALIDA
-    </div>    
+    </div>
+    <div class="col col-lg-2 bold">
+      TIPO
+    </div>
   </div>
   <div class="row" *ngFor="let vehicle of vehicles">
     <div class="col col-lg-2">
@@ -25,6 +28,9 @@
     </div>
     <div class="col col-lg-2">
       {{ vehicle.fechaSalida | date }}
-    </div> 
+    </div>
+    <div class="col col-lg-2">
+      {{ vehicle.tipo }}
+    </div>     
   </div>
 </div>

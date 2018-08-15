@@ -6,7 +6,15 @@ import com.parking.jpa.entity.Vehiculo;
 
 public interface VigilanteRegistros {
 	
-	public boolean espacioDisponible();
+	public List<Vehiculo> obtenerVehiculos();	
+	
+	public int cantidadCarros();
+	
+	public int cantidadMotos();
+	
+	public int cantidadVehiculosParqueados();
+	
+	public boolean espacioDisponibleParqueadero();
 	
 
 }

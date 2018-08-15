@@ -19,6 +19,7 @@ public class VehiculoController {
 	
 	@GetMapping("/vehiculos")
 	public List<Vehiculo> index(){
-		return vehiculoService.findAll();
+		return vehiculoService.obtenerVehiculos();
 	}
+	
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.parking.domain.Vigilante;
 import com.parking.jpa.dao.IVehiculoDao;
 import com.parking.jpa.entity.Vehiculo;
 
@@ -17,7 +18,7 @@ public class VehiculoServiceImplement implements IVehiculoService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Vehiculo> findAll() {
+	public List<Vehiculo> obtenerVehiculos() {
 		return (List<Vehiculo>) vehiculoDao.findAll();
 	}
 

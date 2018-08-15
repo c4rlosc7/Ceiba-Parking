@@ -6,6 +6,6 @@ import com.parking.jpa.entity.*;
 
 public interface IVehiculoService {
 
-	public List<Vehiculo> findAll();
+	public List<Vehiculo> obtenerVehiculos();
 	
 }
