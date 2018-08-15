@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.parking.models.dao.IVehiculoDao;
-import com.parking.models.entity.Vehiculo;
+import com.parking.jpa.dao.IVehiculoDao;
+import com.parking.jpa.entity.Vehiculo;
 
 @Service
 public class VehiculoServiceImplement implements IVehiculoService {

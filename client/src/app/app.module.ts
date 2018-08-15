@@ -3,18 +3,19 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { VehiculosComponent } from './vehiculos/vehiculos.component';
+import { VehicleComponent } from './vehicle/vehicle.component';
+import { VehicleService } from './vehicle/vehicle.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    VehiculosComponent
+    VehicleComponent
   ],
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [VehicleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

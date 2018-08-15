@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row my-4 vehicle-style">
+    <div class="col col-lg-2 bold">
+      PLACA
+    </div>
+    <div class="col col-lg-2 bold">
+      CILINDRAJE
+    </div>
+    <div class="col col-lg-2 bold">
+      FECHA INGRESO
+    </div>
+    <div class="col col-lg-2 bold">
+      FECHA SALIDA
+    </div>    
+  </div>
+  <div class="row" *ngFor="let vehicle of vehicles">
+    <div class="col col-lg-2">
+      {{ vehicle.placa }}
+    </div>
+    <div class="col col-lg-2">
+      {{ vehicle.cilindraje }}
+    </div>
+    <div class="col col-lg-2">
+      {{ vehicle.fecha_entrada | date }}
+    </div>
+    <div class="col col-lg-2">
+      {{ vehicle.fecha_salida | date }}
+    </div> 
+  </div>
+</div>

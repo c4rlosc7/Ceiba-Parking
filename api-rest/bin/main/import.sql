@@ -1,1 +1,1 @@
-INSERT INTO vehiculos(placa) VALUES('GDER-23');
+INSERT INTO vehiculos(placa, cilindraje, fecha_ingreso, fecha_salida, costo) VALUES('GDER-23', 'C900', '2018-45-74', '2018-10-10', '1000');

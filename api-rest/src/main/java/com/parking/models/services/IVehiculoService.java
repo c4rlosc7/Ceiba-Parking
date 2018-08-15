@@ -2,7 +2,7 @@ package com.parking.models.services;
 
 import java.util.List;
 
-import com.parking.models.entity.*;
+import com.parking.jpa.entity.*;
 
 public interface IVehiculoService {
 
