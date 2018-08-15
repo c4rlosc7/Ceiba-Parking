@@ -2,7 +2,7 @@ export class Vehicle {
     id: number;
     placa: String;
     cilindraje: String;
-    fecha_ingreso: String;
-    fecha_salida: String;
+    fechaIngreso: String;
+    fechaSalida: String;
     costo: String;    
 }

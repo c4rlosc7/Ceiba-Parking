@@ -20,6 +20,7 @@ public class Vehiculo implements Serializable {
 	private Long id;
 	private String placa;
 	private String cilindraje;
+	private int tipo;
 	
 	@Column(name = "fecha_ingreso")
 	private String fechaIngreso;
@@ -52,6 +53,14 @@ public class Vehiculo implements Serializable {
 	public void setCilindraje(String cilindraje) {
 		this.cilindraje = cilindraje;
 	}
+	
+	public int getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}	
 
 	public String getFechaIngreso() {
 		return fechaIngreso;
@@ -76,5 +85,7 @@ public class Vehiculo implements Serializable {
 	public void setCosto(String costo) {
 		this.costo = costo;
 	}
+	
+	
 
 }
