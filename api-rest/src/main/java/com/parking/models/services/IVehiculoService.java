@@ -8,4 +8,6 @@ public interface IVehiculoService {
 
 	public List<Vehiculo> obtenerVehiculos();
 	
+	public Vehiculo agregar(Vehiculo vehiculo);
+	
 }

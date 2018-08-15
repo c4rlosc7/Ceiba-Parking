@@ -22,4 +22,10 @@ public class VehiculoServiceImplement implements IVehiculoService {
 		return (List<Vehiculo>) vehiculoDao.findAll();
 	}
 
+	@Override
+	public Vehiculo agregar(Vehiculo vehiculo) {
+		// aqui validacion del vigilante
+		return vehiculoDao.save(vehiculo);
+	}
+
 }

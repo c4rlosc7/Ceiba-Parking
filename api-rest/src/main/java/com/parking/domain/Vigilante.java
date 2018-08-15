@@ -7,37 +7,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.parking.constant.Constantes;
 import com.parking.jpa.dao.IVehiculoDao;
 import com.parking.jpa.entity.Vehiculo;
+import com.parking.models.services.VehiculoServiceImplement;
 
 public class Vigilante implements VigilanteRegistros {		
 
-	private IVehiculoDao vehiculoDao;
+	private VehiculoServiceImplement vehiculoService;
 	Constantes constante;	
 	
-	/*
-	 * Constructor con parametros Dao
-	 */
-	public Vigilante(IVehiculoDao vehiculoDao) {
-		this.vehiculoDao = vehiculoDao;
+	public Vigilante(VehiculoServiceImplement vehiculoService) {
+		this.vehiculoService = vehiculoService;
 	}
 
 	/*
 	 * Consutructor sin parametros
 	 */
 	public Vigilante() {
-
-	}	
-	
-	@Override
-	public List<Vehiculo> obtenerVehiculos() {
-		List<Vehiculo> listaVehiculos;		
-		listaVehiculos = (List<Vehiculo>) vehiculoDao.findAll();		
-		return listaVehiculos;
 	}
-	
+
+
 	@Override
 	public int cantidadCarros() {
 		int cantidadCarros = 0;
-		List<Vehiculo> listaVehiculos = obtenerVehiculos();
+		List<Vehiculo> listaVehiculos;
+		listaVehiculos = vehiculoService.obtenerVehiculos();
 		for(Vehiculo veh : listaVehiculos) {
 			if(veh.getTipo() == constante.CARRO) {
 				cantidadCarros += 1;
@@ -46,23 +38,10 @@ public class Vigilante implements VigilanteRegistros {
 		return cantidadCarros;
 	}
 
+
 	@Override
 	public int cantidadMotos() {
 		return 0;
-	}	
-
-	@Override
-	public boolean espacioDisponibleParqueadero() {
-		int cantidad = cantidadVehiculosParqueados();
-		return cantidad < 20;
-	}
-
-	@Override
-	public int cantidadVehiculosParqueados() {		
-		List<Vehiculo> listaVehiculos;		
-		listaVehiculos = (List<Vehiculo>) vehiculoDao.findAll();
-		int cantidadVehiculos = listaVehiculos.size();		
-		return cantidadVehiculos;
 	}
 
 
