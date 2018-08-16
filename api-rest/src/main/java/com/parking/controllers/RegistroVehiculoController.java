@@ -21,12 +21,12 @@ public class RegistroVehiculoController {
 	
 	@GetMapping("/vehiculos")
 	public List<RegistroVehiculoEntity> index(){
-		return vehiculoService.obtenerRegistrosVehiculos();
+		return vehiculoService.getRegistrosVehiculos();
 	}
 	
 	@PostMapping("/agregar")
-	public RegistroVehiculoEntity agregar(@RequestBody RegistroVehiculoEntity vehiculo) {
-		return null;
+	public RegistroVehiculoEntity saveRegistro(@RequestBody RegistroVehiculoEntity vehiculo) {
+		return vehiculoService.saveRegistro(vehiculo);
 	}
 	
 }

@@ -4,9 +4,8 @@ import java.util.List;
 
 import com.parking.jpa.entity.RegistroVehiculoEntity;
 
-public interface VigilanteRegistros {
+public interface IVigilanteRegistros {	
 	
-	public void espacioDisponible(int tipo);
+	public boolean espacioDisponible(RegistroVehiculo vehiculo);
 	
-
 }

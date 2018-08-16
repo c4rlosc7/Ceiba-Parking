@@ -17,35 +17,24 @@ import com.parking.repositories.IRegistroVehiculoRepository;
 public class RegistroVehiculoServiceImplement implements IRegistroVehiculoService {
 	
 	@Autowired
-	private IRegistroVehiculoRepository vehiculoRepository;	
-	
-	private ConvertRegistroVehiculo convertidor;
+	private IRegistroVehiculoRepository vehiculoRepository;		
 	
 	private Constantes tipoVehiculo;
 	
-	private Vigilante vigilante;
-
-	public List<RegistroVehiculo> obtenerRegistrosVehiculosDomain() {
-		List<RegistroVehiculoEntity> registroVehiculosList = (List<RegistroVehiculoEntity>) vehiculoRepository.findAll();
-		List<RegistroVehiculo> registroVehiculoLista = convertidor.convertirADominioLista(registroVehiculosList);
-		return registroVehiculoLista;
-	}
+	private ConvertRegistroVehiculo convertidor;
 	
-	@Override
-	public void agregarRegistro(RegistroVehiculoEntity vehiculo) {
-		vigilante.espacioDisponible(vehiculo.getTipo());
-	}
+	private Vigilante vigilante = new Vigilante();
 
 	@Override
-	@Transactional(readOnly = true)
-	public List<RegistroVehiculoEntity> obtenerRegistrosVehiculos() {
+	public List<RegistroVehiculoEntity> getRegistrosVehiculos() {
 		return (List<RegistroVehiculoEntity>) vehiculoRepository.findAll();
 	}
 
 	@Override
-	public RegistroVehiculoEntity agregarRegistro(RegistroVehiculo registro) {
-		RegistroVehiculoEntity registroEntity = convertidor.convertirAEntity(registro);
-		return vehiculoRepository.save(registroEntity);
+	public RegistroVehiculoEntity saveRegistro(RegistroVehiculoEntity registro) {
+		RegistroVehiculo vehiculo = convertidor.convertirADominio(registro);
+		vigilante.espacioDisponible(vehiculo);
+		return vehiculoRepository.save(registro);
 	}
 
 }
