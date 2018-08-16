@@ -9,24 +9,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.parking.jpa.entity.Vehiculo;
-import com.parking.models.services.IVehiculoService;
+import com.parking.jpa.entity.RegistroVehiculoEntity;
+import com.parking.models.services.IRegistroVehiculoService;
 
 @RestController
 @RequestMapping("/api")
-public class VehiculoController {
+public class RegistroVehiculoController {
 
 	@Autowired
-	private IVehiculoService vehiculoService;
+	private IRegistroVehiculoService vehiculoService;
 	
 	@GetMapping("/vehiculos")
-	public List<Vehiculo> index(){
-		return vehiculoService.obtenerVehiculos();
+	public List<RegistroVehiculoEntity> index(){
+		return vehiculoService.obtenerRegistrosVehiculos();
 	}
 	
 	@PostMapping("/agregar")
-	public Vehiculo agregar(@RequestBody Vehiculo vehiculo) {
-		return vehiculoService.agregar(vehiculo);
+	public RegistroVehiculoEntity agregar(@RequestBody RegistroVehiculoEntity vehiculo) {
+		return null;
 	}
 	
 }
