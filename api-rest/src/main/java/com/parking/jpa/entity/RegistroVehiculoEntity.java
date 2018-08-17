@@ -1,13 +1,17 @@
 package com.parking.jpa.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "vehiculos")
@@ -21,13 +25,21 @@ public class RegistroVehiculoEntity implements Serializable {
 	private String placa;
 	private String cilindraje;
 	private int tipo;
-	
+
 	@Column(name = "fecha_ingreso")
-	private String fechaIngreso;
-	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fechaIngreso;
+
 	@Column(name = "fecha_salida")
-	private String fechaSalida;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fechaSalida;
+
 	private String costo;
+
+	@PrePersist
+	private void onCreate() {
+		fechaIngreso = new Date();
+	}
 
 	/* Getters and Setters */
 	public Long getId() {
@@ -53,28 +65,28 @@ public class RegistroVehiculoEntity implements Serializable {
 	public void setCilindraje(String cilindraje) {
 		this.cilindraje = cilindraje;
 	}
-	
+
 	public int getTipo() {
 		return tipo;
 	}
 
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
-	}	
+	}
 
-	public String getFechaIngreso() {
+	public Date getFechaIngreso() {
 		return fechaIngreso;
 	}
 
-	public void setFechaIngreso(String fechaIngreso) {
+	public void setFechaIngreso(Date fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
 
-	public String getFechaSalida() {
+	public Date getFechaSalida() {
 		return fechaSalida;
 	}
 
-	public void setFechaSalida(String fechaSalida) {
+	public void setFechaSalida(Date fechaSalida) {
 		this.fechaSalida = fechaSalida;
 	}
 
@@ -85,7 +97,5 @@ public class RegistroVehiculoEntity implements Serializable {
 	public void setCosto(String costo) {
 		this.costo = costo;
 	}
-	
-	
 
 }

@@ -1,5 +1,7 @@
 package com.parking.domain;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -23,12 +25,17 @@ public class Vigilante implements IVigilanteRegistros {
 	public static final int MAX_CARROS = 20;
 	public static final int MAX_MOTOS = 10;
 	
-	public static final char CARACTER_A = 'A';	
+	public static final char CARACTER_A = 'A';
+	public static final String ERROR_CARGANDO_DATOS = "Error carga los datos";	
+	
+	//LocalDate currentDate = LocalDate.now();
+	//LocalDateTime currentDateTime = LocalDateTime.now();	
 
 	@Autowired
 	private RegistroVehiculoServiceImplement serviceImplent;
-
-	private IRegistroVehiculoRepository vehiculoRepository;
+	
+	@Autowired
+	private IRegistroVehiculoRepository vehiculoRepository;	
 	
 	private ConvertRegistroVehiculo convertidor;
 
@@ -52,6 +59,20 @@ public class Vigilante implements IVigilanteRegistros {
 	}
 	
 	/**
+	 * Método que obtiene todos los registros agregados en la DB
+	 * @return registroVehiculoLista
+	 */
+	public List<RegistroVehiculo> obtenerListaVehiculosDomain() {
+		try {
+			List<RegistroVehiculoEntity> registroVehiculosList = (List<RegistroVehiculoEntity>) vehiculoRepository.findAll();
+			List<RegistroVehiculo> registroVehiculoLista = convertidor.convertirADominioLista(registroVehiculosList);
+			return registroVehiculoLista;
+		} catch (NoResultException e) {
+			throw new ParqueoException(ERROR_CARGANDO_DATOS);
+		}
+	}	
+	
+	/**
 	 * Valida regla del negocio si la placa inicia por la letra "A"
 	 * @param placa
 	 */
@@ -67,7 +88,7 @@ public class Vigilante implements IVigilanteRegistros {
 	 */
 	public void espacioCarros() {
 		int cantidad = 0;
-		List<RegistroVehiculo> listaVehiculos = serviceImplent.obtenerListaVehiculosDomain();
+		List<RegistroVehiculo> listaVehiculos = obtenerListaVehiculosDomain();
 		for(RegistroVehiculo veh : listaVehiculos) {
 			if(veh.getTipo() == CARRO) {
 				cantidad += 1;
@@ -83,7 +104,7 @@ public class Vigilante implements IVigilanteRegistros {
 	 */	
 	public void espacioMotos() {
 		int cantidad = 0;
-		List<RegistroVehiculo> listaVehiculos = serviceImplent.obtenerListaVehiculosDomain();
+		List<RegistroVehiculo> listaVehiculos = obtenerListaVehiculosDomain();
 		for(RegistroVehiculo veh : listaVehiculos) {
 			if(veh.getTipo() == MOTO) {
 				cantidad += 1;

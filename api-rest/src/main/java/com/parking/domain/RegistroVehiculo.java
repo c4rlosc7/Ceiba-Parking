@@ -1,19 +1,21 @@
 package com.parking.domain;
 
+import java.util.Date;
+
 public class RegistroVehiculo {
 	
 	private String placa;
 	private String cilindraje;
 	private int tipo;
-	private String fechaIngreso;
-	private String fechaSalida;
+	private Date fechaIngreso;
+	private Date fechaSalida;
 	private String costo;
 	
 	public RegistroVehiculo() {		
 	}
 	
 	/* Constructor con parametros */
-	public RegistroVehiculo(String placa, String cilindraje, int tipo, String fechaIngreso, String fechaSalida, String costo) {
+	public RegistroVehiculo(String placa, String cilindraje, int tipo, Date fechaIngreso, Date fechaSalida, String costo) {
 		this.placa = placa;
 		this.cilindraje = cilindraje;
 		this.tipo = tipo;
@@ -41,16 +43,16 @@ public class RegistroVehiculo {
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
-	public String getFechaIngreso() {
+	public Date getFechaIngreso() {
 		return fechaIngreso;
 	}
-	public void setFechaIngreso(String fechaIngreso) {
+	public void setFechaIngreso(Date fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
-	public String getFechaSalida() {
+	public Date getFechaSalida() {
 		return fechaSalida;
 	}
-	public void setFechaSalida(String fechaSalida) {
+	public void setFechaSalida(Date fechaSalida) {
 		this.fechaSalida = fechaSalida;
 	}
 	public String getCosto() {

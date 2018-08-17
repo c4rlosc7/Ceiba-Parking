@@ -25,22 +25,46 @@ public class RegistroVehiculoController {
 	@Autowired
 	private IRegistroVehiculoService vehiculoService;
 	
+	/**
+	 * Listar registro de vehiculos
+	 * @return
+	 */
 	@GetMapping("/vehiculos")
 	public List<RegistroVehiculoEntity> index(){
 		return vehiculoService.getRegistrosVehiculos();
 	}
 	
-	@PostMapping("/agregar")
+	/**
+	 * Agregar nuevo registro al parqueadero
+	 * @param vehiculo
+	 * @return
+	 */
+	@PostMapping("/add")
 	@ResponseStatus(HttpStatus.CREATED)
 	public RegistroVehiculoEntity saveRegistro(@RequestBody RegistroVehiculoEntity vehiculo) {
 		return vehiculoService.saveRegistro(vehiculo);
 	}
 	
-	/*@DeleteMapping("/delete/{id}")
-	//@ResponseStatus(HttpStatus.NO_CONTENT)
-	public RegistroVehiculoEntity deleteRegistro(@PathVariable Long id) {
-		return vehiculoService.deleteRegistoVehiculo(id);
-	}*/
+	/**
+	 * Elimina registro del parqueadero
+	 * @param id
+	 * @return
+	 */
+	@DeleteMapping("/delete/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteRegistro(@PathVariable Long id) {
+		vehiculoService.deleteRegistoVehiculo(id);
+	}
+	
+	/**
+	 * Calculo del costo del parquedo
+	 * @return
+	 */
+	@PostMapping("")
+	@ResponseStatus(HttpStatus.CREATED)
+	public RegistroVehiculoEntity calculateFee() {
+		return null;
+	}
 	
 	
 }
