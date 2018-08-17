@@ -36,11 +36,11 @@ public class RegistroVehiculoController {
 		return vehiculoService.saveRegistro(vehiculo);
 	}
 	
-	@DeleteMapping("/delete/{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteRegistro(@PathVariable Long id) {
-		//vehiculoService.deleteRegistoVehiculo(id);
-	}	
+	/*@DeleteMapping("/delete/{id}")
+	//@ResponseStatus(HttpStatus.NO_CONTENT)
+	public RegistroVehiculoEntity deleteRegistro(@PathVariable Long id) {
+		return vehiculoService.deleteRegistoVehiculo(id);
+	}*/
 	
 	
 }

@@ -5,9 +5,6 @@ import java.util.List;
 import javax.persistence.NoResultException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.parking.constant.Constantes;
 import com.parking.convert.ConvertRegistroVehiculo;
 import com.parking.exceptions.*;
 import com.parking.jpa.entity.RegistroVehiculoEntity;
@@ -18,63 +15,104 @@ public class Vigilante implements IVigilanteRegistros {
 
 	public static final String NO_HAY_ESPACIO_PARA_CARRO = "No hay espacio para mas carros en el parqueadero";
 	public static final String NO_HAY_ESPACIO_PARA_MOTO = "No hay mas espacio para mas motos en el parqueadero";
-	public static final String INGRESO_DOMINGO_LUNES = "Las placas que inician por la letra A solo pueden ingresar los dias domingo y lunes";
+	public static final String INGRESO_DOMINGO_LUNES = "Las placas inicia por la letra A. Solo pueden ingresar los dias Domingo y Lunes";	
+	
+	public static final int CARRO = 1;
+	public static final int MOTO  = 2;
+	
+	public static final int MAX_CARROS = 20;
+	public static final int MAX_MOTOS = 10;
+	
+	public static final char CARACTER_A = 'A';	
 
 	@Autowired
 	private RegistroVehiculoServiceImplement serviceImplent;
 
 	private IRegistroVehiculoRepository vehiculoRepository;
-
-	private Constantes constantes = new Constantes();
 	
 	private ConvertRegistroVehiculo convertidor;
 
-
+	/**
+	 * Constructor sin parametros
+	 */
+	public Vigilante() {
+	}
+	
+	/**
+	 * Constructor con parametros
+	 * @param vehiculoRepository
+	 */
 	 public Vigilante(IRegistroVehiculoRepository vehiculoRepository) {
 		 this.vehiculoRepository = vehiculoRepository; 
 	 }
 
-	public Vigilante() {
-	}
-
-	@Autowired
-	public Vigilante(RegistroVehiculoServiceImplement serviceImplent) {
-		this.serviceImplent = serviceImplent;
-	}
-
 	@Override
 	public boolean espacioDisponible(RegistroVehiculo vehiculo) {
-		int totalVehiculo = getVehiculosXTipo(vehiculo);
-		if (vehiculo.getTipo() == constantes.CARRO) {
-			if (totalVehiculo < 20)
-				return true;
-		} else if (vehiculo.getTipo() == constantes.MOTO) {
-			if (totalVehiculo < 10)
-				return true;
-		}
 		return false;
 	}
 	
-	public List<RegistroVehiculo> obtenerListaVehiculosDomain() {
-		List<RegistroVehiculoEntity> registroVehiculosList = (List<RegistroVehiculoEntity>) vehiculoRepository.findAll();
-		List<RegistroVehiculo> registroVehiculoLista = convertidor.convertirADominioLista(registroVehiculosList);
-		return registroVehiculoLista;
-	}	
+	/**
+	 * Valida regla del negocio si la placa inicia por la letra "A"
+	 * @param placa
+	 */
+	public void validarPlacaXA(String placa) {
+		char letra = placa.charAt(0);
+		if(letra == CARACTER_A) {			
+			throw new ParqueoException(INGRESO_DOMINGO_LUNES);
+		}
+	}
 	
-
-	public int getVehiculosXTipo(RegistroVehiculo vehiculo) {
-		try {
-			int cantidad = 0;
-			List<RegistroVehiculo> lista = obtenerListaVehiculosDomain();
-			for (RegistroVehiculo regi : lista) {
-				if (regi.getTipo() == vehiculo.getTipo()) {
-					cantidad += 1;
-				}
+	/**
+	 * Método que permite conocer la cantidad de carros disponibles
+	 */
+	public void espacioCarros() {
+		int cantidad = 0;
+		List<RegistroVehiculo> listaVehiculos = serviceImplent.obtenerListaVehiculosDomain();
+		for(RegistroVehiculo veh : listaVehiculos) {
+			if(veh.getTipo() == CARRO) {
+				cantidad += 1;
+			}			
+		}
+		if(cantidad >= MAX_CARROS) {
+			throw new ParqueoException(NO_HAY_ESPACIO_PARA_CARRO);
+		}		
+	}
+	
+	/**
+	 * Método que permite conocer la cantidad de motos disponibles
+	 */	
+	public void espacioMotos() {
+		int cantidad = 0;
+		List<RegistroVehiculo> listaVehiculos = serviceImplent.obtenerListaVehiculosDomain();
+		for(RegistroVehiculo veh : listaVehiculos) {
+			if(veh.getTipo() == MOTO) {
+				cantidad += 1;
 			}
-			return cantidad;
-		} catch (NoResultException e) {
+		}
+		if(cantidad >= MAX_MOTOS) {
 			throw new ParqueoException(NO_HAY_ESPACIO_PARA_MOTO);
 		}
 	}
+	
+	/**
+	 * 
+	 * @param tipo
+	 */
+	public void validarEspacio(int tipo) {
+		if(tipo == CARRO) {
+			espacioCarros();
+		}else if(tipo == MOTO) {
+			espacioMotos();
+		}
+	}
+	
+	/**
+	 * Implementa las reglas del negocio
+	 * @param registro
+	 */
+	public void validRegistro(RegistroVehiculo registro) {
+		validarPlacaXA(registro.getPlaca());
+		validarEspacio(registro.getTipo());
+	}	
 
 }

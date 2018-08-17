@@ -10,5 +10,6 @@ public interface IRegistroVehiculoService {
 	
 	public RegistroVehiculoEntity saveRegistro(RegistroVehiculoEntity registro);
 	
-	public void deleteRegistoVehiculo(Long id);
+	//public RegistroVehiculoEntity deleteRegistoVehiculo(Long id);
+	
 }
