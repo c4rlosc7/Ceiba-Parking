@@ -26,15 +26,23 @@ public class RegistroVehiculoServiceImplement implements IRegistroVehiculoServic
 	private Vigilante vigilante = new Vigilante();
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<RegistroVehiculoEntity> getRegistrosVehiculos() {
 		return (List<RegistroVehiculoEntity>) vehiculoRepository.findAll();
 	}
 
 	@Override
+	@Transactional
 	public RegistroVehiculoEntity saveRegistro(RegistroVehiculoEntity registro) {
 		RegistroVehiculo vehiculo = convertidor.convertirADominio(registro);
 		vigilante.espacioDisponible(vehiculo);
 		return vehiculoRepository.save(registro);
+	}
+
+	@Override
+	@Transactional
+	public void deleteRegistoVehiculo(Long id) {		
+		vehiculoRepository.deleteById(id);
 	}
 
 }
