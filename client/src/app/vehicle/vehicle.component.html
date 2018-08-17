@@ -34,11 +34,11 @@
         {{ vehicle.fechaSalida | date }}
       </div>
       <div class="col col-lg-2" *ngIf="vehicle.tipo==1;">
-          <i class="fal fa-car"></i>
+          <i class="fa fa-car" aria-hidden="true"></i>
       </div>
       <div class="col col-lg-2" *ngIf="vehicle.tipo==2;">
-          Moto
-        </div>          
+          <i class="fa fa-motorcycle" aria-hidden="true"></i>
+      </div>          
     </div>    
   </div>
 </div>
