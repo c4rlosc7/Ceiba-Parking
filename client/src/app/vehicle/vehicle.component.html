@@ -1,36 +1,44 @@
 <div class="container">
-  <div class="row my-4 vehicle-style">
-    <div class="col col-lg-2 bold">
-      PLACA
-    </div>
-    <div class="col col-lg-2 bold">
-      CILINDRAJE
-    </div>
-    <div class="col col-lg-2 bold">
-      FECHA INGRESO
-    </div>
-    <div class="col col-lg-2 bold">
-      FECHA SALIDA
-    </div>
-    <div class="col col-lg-2 bold">
-      TIPO
-    </div>
+  <div>    
+    <h1>Total vehiculos: {{ lengthVehicules }}</h1>
   </div>
-  <div class="row" *ngFor="let vehicle of vehicles">
-    <div class="col col-lg-2">
-      {{ vehicle.placa }}
+  <div>
+    <div class="row my-4 vehicle-style">
+      <div class="col col-lg-2 bold">
+        PLACA
+      </div>
+      <div class="col col-lg-2 bold">
+        CILINDRAJE
+      </div>
+      <div class="col col-lg-2 bold">
+        FECHA INGRESO
+      </div>
+      <div class="col col-lg-2 bold">
+        FECHA SALIDA
+      </div>
+      <div class="col col-lg-2 bold">
+        TIPO
+      </div>
     </div>
-    <div class="col col-lg-2">
-      {{ vehicle.cilindraje }}
-    </div>
-    <div class="col col-lg-2">
-      {{ vehicle.fechaIngreso | date }}
-    </div>
-    <div class="col col-lg-2">
-      {{ vehicle.fechaSalida | date }}
-    </div>
-    <div class="col col-lg-2">
-      {{ vehicle.tipo }}
-    </div>     
+    <div class="row" *ngFor="let vehicle of vehicles">
+      <div class="col col-lg-2">
+        {{ vehicle.placa }}
+      </div>
+      <div class="col col-lg-2">
+        {{ vehicle.cilindraje }}
+      </div>
+      <div class="col col-lg-2">
+        {{ vehicle.fechaIngreso | date }}
+      </div>
+      <div class="col col-lg-2">
+        {{ vehicle.fechaSalida | date }}
+      </div>
+      <div class="col col-lg-2" *ngIf="vehicle.tipo==1;">
+          <i class="fal fa-car"></i>
+      </div>
+      <div class="col col-lg-2" *ngIf="vehicle.tipo==2;">
+          Moto
+        </div>          
+    </div>    
   </div>
 </div>

@@ -11,10 +11,13 @@ export class VehicleComponent implements OnInit {
 
   vehicles: Vehicle[] = [];
 
+  lengthVehicules: number;
+
   constructor(private vehicleService: VehicleService) { }
 
   ngOnInit() {
     this.vehicles = this.vehicleService.getVehicleList();
+    this.lengthVehicules = this.vehicles.length;
   }
 
 }
