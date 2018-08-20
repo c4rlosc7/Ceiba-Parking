@@ -1,6 +1,11 @@
 <div class="container">
-  <div>    
-    <h1>Total vehiculos: {{ lengthVehicules }}</h1>
+  <div class="row">
+    <div class="col col-lg-6">
+      <h1>Total vehiculos: {{ lengthVehicules }}</h1>
+    </div>
+    <div class="col col-lg-6 text-right" style="padding-top: 12px;">
+      <button type="button" class="btn btn-primary">Nuevo ingreso</button>
+    </div>    
   </div>
   <div>
     <div class="row my-4 vehicle-style">
@@ -20,7 +25,7 @@
         TIPO
       </div>
     </div>
-    <div class="row" *ngFor="let vehicle of vehicles">
+    <div class="row" *ngFor="let vehicle of vehicles" style="border: solid 1px gray;padding: 20px 0; margin: 20px 0;">
       <div class="col col-lg-2">
         {{ vehicle.placa }}
       </div>
@@ -33,12 +38,23 @@
       <div class="col col-lg-2">
         {{ vehicle.fechaSalida | date }}
       </div>
-      <div class="col col-lg-2" *ngIf="vehicle.tipo==1;">
+      <div class="col col-lg-1" *ngIf="vehicle.tipo==1;">
           <i class="fa fa-car" aria-hidden="true"></i>
       </div>
-      <div class="col col-lg-2" *ngIf="vehicle.tipo==2;">
+      <div class="col col-lg-1" *ngIf="vehicle.tipo==2;">
           <i class="fa fa-motorcycle" aria-hidden="true"></i>
-      </div>          
-    </div>    
+      </div>
+      <div class="col col-lg-1">        
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+      </div>
+      <div class="col col-lg-2">
+        <button type="button" class="btn btn-danger">Calcular pago</button>
+      </div>
+      <div class="row">
+          <div class="col col-lg-12">
+            <h3>Costo parqueadero: $ 12000</h3>
+          </div>
+        </div>      
+    </div>   
   </div>
 </div>
