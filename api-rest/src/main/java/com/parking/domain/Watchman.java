@@ -2,12 +2,8 @@ package com.parking.domain;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.NoResultException;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.parking.convert.ConvertDomainToEntity;
 import com.parking.exceptions.*;
-import com.parking.jpa.entity.VehicleRegisterEntity;
 import com.parking.models.services.VehicleRegisterServiceImplement;
 import com.parking.repositories.IVehicleRegisterRepository;
 
@@ -28,15 +24,19 @@ public class Watchman implements IWatchman {
 	
 	public static final int DIA_DOMINGO = 1;
 	public static final int DIA_LUNES = 2;
-
+	
+	public static final int COSTO_X_HORA_CARRO = 1000;
+	public static final int COSTO_X_HORA_MOTO = 500;
+	public static final int COSTO_X_DIA_CARRO = 8000;
+	public static final int COSTO_X_DIA_MOTO = 4000;
+	public static final int VALOR_ADICIONAL_ALTO_CILIDRAJE = 2000;
+	
 	@SuppressWarnings("unused")
 	@Autowired
 	private VehicleRegisterServiceImplement serviceImplent;
 
 	@Autowired
-	private IVehicleRegisterRepository vehiculoRepository;
-
-	private ConvertDomainToEntity convertidor;
+	private IVehicleRegisterRepository vehicleRepository;
 
 	/**
 	 * Constructor sin parametros
@@ -46,30 +46,10 @@ public class Watchman implements IWatchman {
 
 	/**
 	 * Constructor con parametros
-	 * @param vehiculoRepository
+	 * @param vehicleRepository
 	 */
-	public Watchman(IVehicleRegisterRepository vehiculoRepository) {
-		this.vehiculoRepository = vehiculoRepository;
-	}
-
-	@Override
-	public boolean espacioDisponible(VehicleRegister vehiculo) {
-		return false;
-	}
-
-	/**
-	 * Método que obtiene todos los registros agregados en la DB
-	 * @return registroVehiculoLista
-	 */
-	public List<VehicleRegister> obtenerListaVehiculosDomain() {
-		try {
-			List<VehicleRegisterEntity> registroVehiculosList = (List<VehicleRegisterEntity>) vehiculoRepository
-					.findAll();
-			List<VehicleRegister> registroVehiculoLista = convertidor.convertEntityToDomainList(registroVehiculosList);
-			return registroVehiculoLista;
-		} catch (NoResultException e) {
-			throw new ParkingException(ERROR_CARGANDO_DATOS);
-		}
+	public Watchman(IVehicleRegisterRepository vehicleRepository) {
+		this.vehicleRepository = vehicleRepository;
 	}
 
 	/**
@@ -77,16 +57,14 @@ public class Watchman implements IWatchman {
 	 * @param placa
 	 */
 	public void authorizedPlate(String placa) {
-		char letra = placa.charAt(0);
-		if (letra == CARACTER_A) {
-			diaAutorizado();
-		}
+		char letter = placa.charAt(0);
+		if (letter == CARACTER_A) authorizedDay();
 	}
 	
 	/**
 	 * Método que valida el día que va a ingresar el vehiculo, si esta autorizado a entrar
 	 */
-	public void diaAutorizado() {
+	public void authorizedDay() {
         Date today = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(today);
@@ -100,23 +78,44 @@ public class Watchman implements IWatchman {
 	 * Método que valida el espacio disponible de carros o motos
 	 * @param tipo
 	 */
-	public void validarEspacio(int tipo) {
-		if (tipo == CARRO) {
-			int cantidad = vehiculoRepository.findAllCars();
-			if (cantidad >= 20) throw new ParkingException(NO_HAY_ESPACIO_PARA_CARRO);
-		} else if (tipo == MOTO) {
-			int cantidad = vehiculoRepository.findAllMotorcycles();
-			if (cantidad >= 10) throw new ParkingException(NO_HAY_ESPACIO_PARA_MOTO);
+	public void availableSpace(int type) {
+		int numVehicles = 0;
+		if (type == CARRO) {
+			numVehicles = vehicleRepository.findAllCars();
+			if (numVehicles >= 20) throw new ParkingException(NO_HAY_ESPACIO_PARA_CARRO);
+		} else if (type == MOTO) {
+			numVehicles = vehicleRepository.findAllMotorcycles();
+			if (numVehicles >= 10) throw new ParkingException(NO_HAY_ESPACIO_PARA_MOTO);
 		}
 	}
 
 	/**
 	 * Implementa las reglas del negocio
-	 * @param registro
+	 * @param register
 	 */
-	public void validateInRegister(VehicleRegister registro) {
-		authorizedPlate(registro.getPlaca());
-		validarEspacio(registro.getTipo());
+	@Override
+	public void validateInRegister(VehicleRegister register) {
+		authorizedPlate(register.getPlaca());
+		availableSpace(register.getTipo());
 	}
+
+	/**
+	 * Método que retorna la diferencia entre 2 fechas en días
+	 */
+	@Override
+	public long getDaysBetweenTwoDays(Date d1, Date d2) {
+        long difference = ( d1.getTime() - d2.getTime() ) / 8640000; // milliseconds in a day
+        return Math.abs(difference/10);
+	}
+
+	/**
+	 * Método que retorn la diferencia entre 2 fechas en horas
+	 */
+	@Override
+	public long getHoursBetweenTwoDays(Date d1, Date d2) {
+        long difference = ( d1.getTime() - d2.getTime() ) / 3600000; // milliseconds in a day
+        return Math.abs(difference/10);
+	}
+
 
 }

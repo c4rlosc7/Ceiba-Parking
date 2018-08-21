@@ -1,5 +1,9 @@
 package com.parking.models.services;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -50,6 +54,7 @@ public class VehicleRegisterServiceImplement implements IVehicleRegisterService 
 	}
 
 	@Override
+	@Transactional
 	public VehicleRegisterEntity updatedVehicleRegister(VehicleRegisterEntity vehicle, Long id) {
 		VehicleRegisterEntity vehicleUpdate = findById(id);
 		vehicleUpdate.setId(vehicle.getId());
@@ -60,8 +65,17 @@ public class VehicleRegisterServiceImplement implements IVehicleRegisterService 
 	}
 
 	@Override
+	@Transactional
 	public VehicleRegisterEntity findById(Long id) {
 		return vehicleRepository.findById(id).orElse(null);
+	}	
+
+	@Override
+	@Transactional
+	public void calculateFee(VehicleRegisterEntity vehicle, Long id) {
+		VehicleRegisterEntity vehicleCalcFee = findById(id);
+		Instant instant = LocalDateTime.now().toInstant(ZoneOffset.UTC);
+		vehicleCalcFee.setFechaSalida(Date.from(instant));
 	}
 
 

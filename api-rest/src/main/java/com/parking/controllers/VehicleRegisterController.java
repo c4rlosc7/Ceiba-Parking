@@ -27,7 +27,7 @@ public class VehicleRegisterController {
 	private IVehicleRegisterService vehicleService;
 	
 	/**
-	 * Listar registro de vehiculos
+	 * Listar registro de vehiculos con la fecha salida en null
 	 * @return
 	 */
 	@GetMapping("/vehicles")
@@ -64,7 +64,7 @@ public class VehicleRegisterController {
 	 * @return
 	 */
 	@PutMapping("/update/{id}")
-	@ResponseStatus(HttpStatus.OK)
+	@ResponseStatus(HttpStatus.CREATED)
 	public VehicleRegisterEntity updateVehicleRegister(@RequestBody VehicleRegisterEntity vehicle, @PathVariable Long id) {
 		return vehicleService.updatedVehicleRegister(vehicle, id);
 	}
@@ -74,7 +74,7 @@ public class VehicleRegisterController {
 	 * @return
 	 */
 	@PostMapping("/calculate")
-	@ResponseStatus(HttpStatus.CREATED)
+	@ResponseStatus(HttpStatus.OK)
 	public VehicleRegisterEntity calculateFee(@RequestBody VehicleRegisterEntity vehicle, Long id) {
 		return null;
 	}

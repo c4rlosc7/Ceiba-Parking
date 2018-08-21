@@ -21,4 +21,6 @@ public interface IVehicleRegisterService {
 	
 	public VehicleRegisterEntity findById(Long id);
 	
+	public void calculateFee(VehicleRegisterEntity vehicle, Long id);
+	
 }

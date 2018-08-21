@@ -1,11 +1,13 @@
 package com.parking.domain;
 
-import java.util.List;
-
-import com.parking.jpa.entity.VehicleRegisterEntity;
+import java.util.Date;
 
 public interface IWatchman {	
 	
-	public boolean espacioDisponible(VehicleRegister vehiculo);
+	public void validateInRegister(VehicleRegister register);
+	
+	public long getDaysBetweenTwoDays(Date d1, Date d2);
+	
+	public long getHoursBetweenTwoDays(Date d1, Date d2);
 	
 }
