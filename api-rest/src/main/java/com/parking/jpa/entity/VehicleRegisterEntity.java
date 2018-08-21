@@ -1,8 +1,10 @@
 package com.parking.jpa.entity;
 
 import java.io.Serializable;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +17,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "vehiculos")
-public class RegistroVehiculoEntity implements Serializable {
+public class VehicleRegisterEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -30,7 +32,7 @@ public class RegistroVehiculoEntity implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaIngreso;
 
-	@Column(name = "fecha_salida")
+	@Column(name = "fecha_salida", nullable = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaSalida;
 
@@ -38,7 +40,8 @@ public class RegistroVehiculoEntity implements Serializable {
 
 	@PrePersist
 	private void onCreate() {
-		fechaIngreso = new Date();
+		Instant instant = LocalDateTime.now().toInstant(ZoneOffset.UTC);
+		fechaIngreso = Date.from(instant);
 	}
 
 	/* Getters and Setters */

@@ -18,5 +18,8 @@ INSERT INTO vehiculos(placa, cilindraje, tipo, fecha_ingreso, fecha_salida, cost
 INSERT INTO vehiculos(placa, cilindraje, tipo, fecha_ingreso, fecha_salida, costo) VALUES('GDER-23', 'C900', 1, CURRENT_DATE, null, null);
 INSERT INTO vehiculos(placa, cilindraje, tipo, fecha_ingreso, fecha_salida, costo) VALUES('GDER-23', 'C900', 1, CURRENT_DATE, null, null);
 INSERT INTO vehiculos(placa, cilindraje, tipo, fecha_ingreso, fecha_salida, costo) VALUES('GDER-23', 'C900', 1, CURRENT_DATE, null, null);
+INSERT INTO vehiculos(placa, cilindraje, tipo, fecha_ingreso, fecha_salida, costo) VALUES('GDER-23', 'C900', 1, CURRENT_DATE, null, null);
+INSERT INTO vehiculos(placa, cilindraje, tipo, fecha_ingreso, fecha_salida, costo) VALUES('GDER-23', 'C900', 1, CURRENT_DATE, null, null);
+INSERT INTO vehiculos(placa, cilindraje, tipo, fecha_ingreso, fecha_salida, costo) VALUES('GDER-23', 'C900', 1, CURRENT_DATE, null, null);
 /*INSERT INTO vehiculos(placa, cilindraje, tipo, fecha_ingreso, fecha_salida, costo) VALUES('GDER-23', 'C900', 100, CURRENT_DATE, CURRENT_DATE, null);*/
 /*INSERT INTO vehiculos(placa, cilindraje, tipo, fecha_ingreso, fecha_salida, costo) VALUES('GDER-23', 'C900', 100, CURRENT_DATE, CURRENT_DATE, null);*/

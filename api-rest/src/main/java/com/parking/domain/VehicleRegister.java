@@ -2,7 +2,7 @@ package com.parking.domain;
 
 import java.util.Date;
 
-public class RegistroVehiculo {
+public class VehicleRegister {
 	
 	private String placa;
 	private String cilindraje;
@@ -11,11 +11,11 @@ public class RegistroVehiculo {
 	private Date fechaSalida;
 	private String costo;
 	
-	public RegistroVehiculo() {		
+	public VehicleRegister() {		
 	}
 	
 	/* Constructor con parametros */
-	public RegistroVehiculo(String placa, String cilindraje, int tipo, Date fechaIngreso, Date fechaSalida, String costo) {
+	public VehicleRegister(String placa, String cilindraje, int tipo, Date fechaIngreso, Date fechaSalida, String costo) {
 		this.placa = placa;
 		this.cilindraje = cilindraje;
 		this.tipo = tipo;

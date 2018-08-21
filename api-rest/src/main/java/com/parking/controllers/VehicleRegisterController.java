@@ -9,28 +9,30 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.parking.jpa.entity.RegistroVehiculoEntity;
-import com.parking.models.services.IRegistroVehiculoService;
+import com.parking.jpa.entity.VehicleRegisterEntity;
+import com.parking.models.services.IVehicleRegisterService;
 
 @CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/api")
-public class RegistroVehiculoController {
+public class VehicleRegisterController {
 
 	@Autowired
-	private IRegistroVehiculoService vehiculoService;
+	private IVehicleRegisterService vehiculoService;
 	
 	/**
 	 * Listar registro de vehiculos
 	 * @return
 	 */
-	@GetMapping("/vehiculos")
-	public List<RegistroVehiculoEntity> index(){
+	@GetMapping("/vehicles")
+	@ResponseStatus(HttpStatus.OK)
+	public List<VehicleRegisterEntity> getListRegister(){
 		return vehiculoService.getRegistrosVehiculos();
 	}
 	
@@ -41,7 +43,7 @@ public class RegistroVehiculoController {
 	 */
 	@PostMapping("/add")
 	@ResponseStatus(HttpStatus.CREATED)
-	public RegistroVehiculoEntity saveRegistro(@RequestBody RegistroVehiculoEntity vehiculo) {
+	public VehicleRegisterEntity saveRegister(@RequestBody VehicleRegisterEntity vehiculo) {
 		return vehiculoService.saveRegistro(vehiculo);
 	}
 	
@@ -52,8 +54,19 @@ public class RegistroVehiculoController {
 	 */
 	@DeleteMapping("/delete/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteRegistro(@PathVariable Long id) {
+	public void deleteRegister(@PathVariable Long id) {
 		vehiculoService.deleteRegistoVehiculo(id);
+	}
+	
+	/**
+	 * Método actualizar registro
+	 * @param vehiculo
+	 * @return
+	 */
+	@PutMapping("/update")
+	@ResponseStatus(HttpStatus.OK)
+	public VehicleRegisterEntity updateRegister(@RequestBody VehicleRegisterEntity vehiculo) {
+		return null;
 	}
 	
 	/**
@@ -62,9 +75,17 @@ public class RegistroVehiculoController {
 	 */
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
-	public RegistroVehiculoEntity calculateFee() {
+	public VehicleRegisterEntity calculateFee() {
 		return null;
 	}
 	
+	/**
+	 * Método para realizar pruebas 
+	 * @return
+	 */
+	@GetMapping("/test")
+	public int obtenerXTipo(){
+		return vehiculoService.obtenerXTipo();
+	}	
 	
 }

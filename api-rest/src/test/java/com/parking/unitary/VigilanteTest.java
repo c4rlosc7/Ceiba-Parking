@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.parking.domain.Vigilante;
+import com.parking.domain.Watchman;
 
 public class VigilanteTest {
 	
@@ -12,7 +12,7 @@ public class VigilanteTest {
 	public void espacioDisponibleParqueaderoTest() {		
 				
 		//boolean esPrestado =  bibliotecario.esPrestado(libro.getIsbn());
-		Vigilante vigilante;
+		Watchman vigilante;
 		int cantidad = 12;
 		//assertTrue(vigilante.espacioDisponibleParqueadero());
 	}
