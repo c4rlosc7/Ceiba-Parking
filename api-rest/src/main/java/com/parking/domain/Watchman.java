@@ -29,6 +29,7 @@ public class Watchman implements IWatchman {
 	public static final int DIA_DOMINGO = 1;
 	public static final int DIA_LUNES = 2;
 
+	@SuppressWarnings("unused")
 	@Autowired
 	private VehicleRegisterServiceImplement serviceImplent;
 
@@ -75,7 +76,7 @@ public class Watchman implements IWatchman {
 	 * Valida regla del negocio si la placa inicia por la letra "A"
 	 * @param placa
 	 */
-	public void validarPlacaXA(String placa) {
+	public void authorizedPlate(String placa) {
 		char letra = placa.charAt(0);
 		if (letra == CARACTER_A) {
 			diaAutorizado();
@@ -89,8 +90,7 @@ public class Watchman implements IWatchman {
         Date today = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(today);
-        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-        
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);        
         if(dayOfWeek != DIA_DOMINGO && dayOfWeek != DIA_LUNES) {
         	throw new ParkingException(INGRESO_NO_AUTORIZADO);
         }
@@ -114,8 +114,8 @@ public class Watchman implements IWatchman {
 	 * Implementa las reglas del negocio
 	 * @param registro
 	 */
-	public void validRegistro(VehicleRegister registro) {
-		validarPlacaXA(registro.getPlaca());
+	public void validateInRegister(VehicleRegister registro) {
+		authorizedPlate(registro.getPlaca());
 		validarEspacio(registro.getTipo());
 	}
 

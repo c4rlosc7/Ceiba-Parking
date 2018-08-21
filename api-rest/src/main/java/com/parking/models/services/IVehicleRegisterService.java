@@ -4,14 +4,21 @@ import java.util.List;
 
 import com.parking.jpa.entity.*;
 
+/**
+ * Clase con los métodos para realizar la gestion del registro de vehiculos al parqueadero
+ * @author carlos.martinez
+ *
+ */
 public interface IVehicleRegisterService {
 
-	public List<VehicleRegisterEntity> getRegistrosVehiculos();
+	public List<VehicleRegisterEntity> getListVehicleRegister();
 	
-	public VehicleRegisterEntity saveRegistro(VehicleRegisterEntity registro);
+	public VehicleRegisterEntity saveVehicleRegister(VehicleRegisterEntity vehicle);
 	
-	public void deleteRegistoVehiculo(Long id);
+	public void deleteVehicleRegister(Long id);
 	
-	public int obtenerXTipo();
+	public VehicleRegisterEntity updatedVehicleRegister(VehicleRegisterEntity vehicle, Long id);
+	
+	public VehicleRegisterEntity findById(Long id);
 	
 }

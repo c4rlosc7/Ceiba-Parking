@@ -24,7 +24,7 @@ import com.parking.models.services.IVehicleRegisterService;
 public class VehicleRegisterController {
 
 	@Autowired
-	private IVehicleRegisterService vehiculoService;
+	private IVehicleRegisterService vehicleService;
 	
 	/**
 	 * Listar registro de vehiculos
@@ -32,19 +32,19 @@ public class VehicleRegisterController {
 	 */
 	@GetMapping("/vehicles")
 	@ResponseStatus(HttpStatus.OK)
-	public List<VehicleRegisterEntity> getListRegister(){
-		return vehiculoService.getRegistrosVehiculos();
+	public List<VehicleRegisterEntity> getListVehicleRegister(){
+		return vehicleService.getListVehicleRegister();
 	}
 	
 	/**
 	 * Agregar nuevo registro al parqueadero
-	 * @param vehiculo
+	 * @param vehicle
 	 * @return
 	 */
 	@PostMapping("/add")
 	@ResponseStatus(HttpStatus.CREATED)
-	public VehicleRegisterEntity saveRegister(@RequestBody VehicleRegisterEntity vehiculo) {
-		return vehiculoService.saveRegistro(vehiculo);
+	public VehicleRegisterEntity saveVehicleRegister(@RequestBody VehicleRegisterEntity vehicle) {
+		return vehicleService.saveVehicleRegister(vehicle);
 	}
 	
 	/**
@@ -54,8 +54,8 @@ public class VehicleRegisterController {
 	 */
 	@DeleteMapping("/delete/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteRegister(@PathVariable Long id) {
-		vehiculoService.deleteRegistoVehiculo(id);
+	public void deleteVehicleRegister(@PathVariable Long id) {
+		vehicleService.deleteVehicleRegister(id);
 	}
 	
 	/**
@@ -63,29 +63,20 @@ public class VehicleRegisterController {
 	 * @param vehiculo
 	 * @return
 	 */
-	@PutMapping("/update")
+	@PutMapping("/update/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public VehicleRegisterEntity updateRegister(@RequestBody VehicleRegisterEntity vehiculo) {
-		return null;
+	public VehicleRegisterEntity updateVehicleRegister(@RequestBody VehicleRegisterEntity vehicle, @PathVariable Long id) {
+		return vehicleService.updatedVehicleRegister(vehicle, id);
 	}
 	
 	/**
 	 * Calculo del costo del parquedo
 	 * @return
 	 */
-	@PostMapping("")
+	@PostMapping("/calculate")
 	@ResponseStatus(HttpStatus.CREATED)
-	public VehicleRegisterEntity calculateFee() {
+	public VehicleRegisterEntity calculateFee(@RequestBody VehicleRegisterEntity vehicle, Long id) {
 		return null;
 	}
-	
-	/**
-	 * Método para realizar pruebas 
-	 * @return
-	 */
-	@GetMapping("/test")
-	public int obtenerXTipo(){
-		return vehiculoService.obtenerXTipo();
-	}	
 	
 }

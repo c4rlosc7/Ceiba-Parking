@@ -18,41 +18,51 @@ import com.parking.repositories.IVehicleRegisterRepository;
 public class VehicleRegisterServiceImplement implements IVehicleRegisterService {
 	
 	@Autowired
-	private IVehicleRegisterRepository vehiculoRepository;
+	private IVehicleRegisterRepository vehicleRepository;
 	
-	private ConvertDomainToEntity convertidor;
+	private ConvertDomainToEntity convert;
 	
-	private Watchman vigilante;
+	private Watchman v;
 	
 	@PostConstruct
 	public void initRepository () {
-		vigilante = new Watchman(vehiculoRepository);
+		v = new Watchman(vehicleRepository);
 	}	
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<VehicleRegisterEntity> getRegistrosVehiculos() {
-		return (List<VehicleRegisterEntity>) vehiculoRepository.findAll();
+	public List<VehicleRegisterEntity> getListVehicleRegister() {
+		return (List<VehicleRegisterEntity>) vehicleRepository.findAll();
 	}
 
 	@Override
 	@Transactional
-	public VehicleRegisterEntity saveRegistro(VehicleRegisterEntity registro) {
-		VehicleRegister registroDomain = convertidor.convertEntityToDomain(registro);
-		vigilante.validRegistro(registroDomain);
-		return vehiculoRepository.save(registro);
+	public VehicleRegisterEntity saveVehicleRegister(VehicleRegisterEntity vehicle) {
+		VehicleRegister registroDomain = convert.convertEntityToDomain(vehicle);
+		v.validateInRegister(registroDomain);
+		return vehicleRepository.save(vehicle);
 	}
 
 	@Override
 	@Transactional
-	public void deleteRegistoVehiculo(Long id) {
-		vehiculoRepository.deleteById(id);
+	public void deleteVehicleRegister(Long id) {
+		vehicleRepository.deleteById(id);
 	}
 
 	@Override
-	public int obtenerXTipo() {
-		return vehiculoRepository.findAllCars();
-	}	
+	public VehicleRegisterEntity updatedVehicleRegister(VehicleRegisterEntity vehicle, Long id) {
+		VehicleRegisterEntity vehicleUpdate = findById(id);
+		vehicleUpdate.setId(vehicle.getId());
+		vehicleUpdate.setPlaca(vehicle.getPlaca());
+		vehicleUpdate.setCilindraje(vehicle.getCilindraje());
+		vehicleUpdate.setTipo(vehicle.getTipo());
+		return vehicleRepository.save(vehicleUpdate);
+	}
+
+	@Override
+	public VehicleRegisterEntity findById(Long id) {
+		return vehicleRepository.findById(id).orElse(null);
+	}
 
 
 }
