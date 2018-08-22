@@ -17,15 +17,16 @@ public class Watchman implements IWatchman {
 	public static final String NO_HAY_ESPACIO_PARA_CARRO = "No hay espacio para mas carros en el parqueadero";
 	public static final String NO_HAY_ESPACIO_PARA_MOTO = "No hay mas espacio para mas motos en el parqueadero";
 	public static final String INGRESO_NO_AUTORIZADO = "No esta autorizado para ingresar";
+	public static final String ERROR_CARGANDO_DATOS = "Error carga los datos";
 
 	public static final int CARRO = 1;
 	public static final int MOTO = 2;
 
 	public static final int MAX_CARROS = 20;
 	public static final int MAX_MOTOS = 10;
-
-	public static final char CARACTER_A = 'A';
-	public static final String ERROR_CARGANDO_DATOS = "Error carga los datos";
+	
+	public static final int HORAS_MAX = 9;
+	public static final char CARACTER_A = 'A';	
 	
 	public static final int DIA_DOMINGO = 1;
 	public static final int DIA_LUNES = 2;
@@ -35,10 +36,6 @@ public class Watchman implements IWatchman {
 	public static final int COSTO_X_DIA_CARRO = 8000;
 	public static final int COSTO_X_DIA_MOTO = 4000;
 	public static final int VALOR_ADICIONAL_ALTO_CILIDRAJE = 2000;
-	
-	@SuppressWarnings("unused")
-	@Autowired
-	private VehicleRegisterServiceImplement serviceImplent;
 
 	@Autowired
 	private IVehicleRegisterRepository vehicleRepository;
@@ -127,7 +124,15 @@ public class Watchman implements IWatchman {
 	public VehicleRegister calculo(VehicleRegister register) {
 		long hours = getHoursBetweenTwoDays(register.getFechaIngreso(), register.getFechaSalida());
 		System.out.println(hours);
-		register.setCosto(hours * COSTO_X_HORA_MOTO);		
+		if(hours < HORAS_MAX) {
+			if(register.getTipo() == CARRO) {
+				register.setCosto(hours * COSTO_X_HORA_CARRO);
+			}else if(register.getTipo() == MOTO) {
+				register.setCosto(hours * COSTO_X_HORA_MOTO);
+			}
+		}else {
+			
+		}
 		return register;
 	}
 
