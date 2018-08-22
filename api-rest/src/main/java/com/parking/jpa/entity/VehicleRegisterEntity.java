@@ -36,7 +36,8 @@ public class VehicleRegisterEntity implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaSalida;
 
-	private String costo;
+	@Column(nullable = true)
+	private long costo;
 
 	@PrePersist
 	private void onCreate() {
@@ -93,11 +94,11 @@ public class VehicleRegisterEntity implements Serializable {
 		this.fechaSalida = fechaSalida;
 	}
 
-	public String getCosto() {
+	public long getCosto() {
 		return costo;
 	}
 
-	public void setCosto(String costo) {
+	public void setCosto(long costo) {
 		this.costo = costo;
 	}
 

@@ -10,4 +10,6 @@ public interface IWatchman {
 	
 	public long getHoursBetweenTwoDays(Date d1, Date d2);
 	
+	public VehicleRegister calculo(VehicleRegister register);
+	
 }

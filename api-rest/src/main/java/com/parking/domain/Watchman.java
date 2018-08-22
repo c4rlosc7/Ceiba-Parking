@@ -2,8 +2,13 @@ package com.parking.domain;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.parking.convert.ConvertDomainToEntity;
 import com.parking.exceptions.*;
+import com.parking.jpa.entity.VehicleRegisterEntity;
 import com.parking.models.services.VehicleRegisterServiceImplement;
 import com.parking.repositories.IVehicleRegisterRepository;
 
@@ -113,8 +118,17 @@ public class Watchman implements IWatchman {
 	 */
 	@Override
 	public long getHoursBetweenTwoDays(Date d1, Date d2) {
-        long difference = ( d1.getTime() - d2.getTime() ) / 3600000; // milliseconds in a day
-        return Math.abs(difference/10);
+        long time = Math.abs(d1.getTime() - d2.getTime());
+        long hours = TimeUnit.MILLISECONDS.toHours(time);        		
+        return hours + 1;
+	}
+
+	@Override
+	public VehicleRegister calculo(VehicleRegister register) {
+		long hours = getHoursBetweenTwoDays(register.getFechaIngreso(), register.getFechaSalida());
+		System.out.println(hours);
+		register.setCosto(hours * COSTO_X_HORA_MOTO);		
+		return register;
 	}
 
 

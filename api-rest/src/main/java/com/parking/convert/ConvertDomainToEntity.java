@@ -44,7 +44,7 @@ public class ConvertDomainToEntity {
 	 * @param vehiculo
 	 * @return
 	 */
-	public static VehicleRegisterEntity convertirAEntity(VehicleRegister vehiculo) {
+	public static VehicleRegisterEntity convertDomainToEntity(VehicleRegister vehiculo) {
 		VehicleRegisterEntity vehiculoEntity = new VehicleRegisterEntity();
 		vehiculoEntity.setPlaca(vehiculo.getPlaca());
 		vehiculoEntity.setCilindraje(vehiculo.getCilindraje());

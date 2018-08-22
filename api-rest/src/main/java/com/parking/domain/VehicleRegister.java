@@ -9,13 +9,13 @@ public class VehicleRegister {
 	private int tipo;
 	private Date fechaIngreso;
 	private Date fechaSalida;
-	private String costo;
+	private long costo;
 	
 	public VehicleRegister() {		
 	}
 	
 	/* Constructor con parametros */
-	public VehicleRegister(String placa, String cilindraje, int tipo, Date fechaIngreso, Date fechaSalida, String costo) {
+	public VehicleRegister(String placa, String cilindraje, int tipo, Date fechaIngreso, Date fechaSalida, long costo) {
 		this.placa = placa;
 		this.cilindraje = cilindraje;
 		this.tipo = tipo;
@@ -55,10 +55,10 @@ public class VehicleRegister {
 	public void setFechaSalida(Date fechaSalida) {
 		this.fechaSalida = fechaSalida;
 	}
-	public String getCosto() {
+	public long getCosto() {
 		return costo;
 	}
-	public void setCosto(String costo) {
+	public void setCosto(long costo) {
 		this.costo = costo;
 	}	
 
