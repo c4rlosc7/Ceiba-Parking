@@ -4,10 +4,14 @@
       <h1>Total vehiculos: {{ lengthVehicules }}</h1>
     </div>
     <div class="col col-lg-6 text-right" style="padding-top: 12px;">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#idVehicleModal">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#idVehicleModal" (click)="openModal()">
         Nuevo ingreso
       </button>
     </div>
+  </div>
+  <div class="row">
+    <div class="col col-lg-3 cars-length">Total carros: 10</div>
+    <div class="col col-lg-3 moto-length">Total motos: 12</div>
   </div>
   <!--<div>-->
   <div class="row my-4 vehicle-style">
@@ -26,6 +30,9 @@
     <div class="col col-lg-2 bold">
       TIPO
     </div>
+    <div class="col col-lg-3 bold">
+      COSTO PARQUEADERO
+    </div>    
   </div>
   <div class="row" *ngFor="let vehicle of vehicleList" style="border: solid 1px gray;padding: 20px 0; margin-top: 20px;">
     <div class="col col-lg-1">
@@ -58,12 +65,13 @@
   </div>
   <!--</div>-->
   <!-- Modal agregar nuevo registro -->
-  <div class="modal fade" id="idVehicleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="backdrop" [ngStyle]="{'display':display}"></div>
+  <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Nuevo ingreso vehiculo</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hideModal()">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -91,7 +99,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="hideModal()">Cancelar</button>
           <button type="button" role="button" class="btn btn-primary" (click)='createdVehicleRegister()'>Guardar</button>
         </div>
       </div>

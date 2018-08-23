@@ -23,8 +23,7 @@ export class VehicleService {
   }
 
   createVehicle(vehicle: Vehicle): Observable<Vehicle> {
-    console.log(vehicle);
-    return this.http.post<Vehicle>(this.urlEndPoint + "/add", vehicle, { headers: this.httpHeaders });
+    return this.http.post<Vehicle>(this.urlEndPoint + "/add", JSON.stringify(vehicle), { headers: this.httpHeaders });
   }
 
 }

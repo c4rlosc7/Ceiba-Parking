@@ -6,3 +6,13 @@
 .bold{
     font-weight: bold;
 }
+
+.cars-length{
+    color: red;
+    font-weight: bold;
+}
+
+.moto-length{
+    color: green;
+    font-weight: bold;
+}

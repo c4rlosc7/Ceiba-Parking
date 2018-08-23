@@ -11,8 +11,11 @@ import { TypesVehicle } from './types-vehicle';
 export class VehicleComponent implements OnInit {
 
   vehicleList: Vehicle[];
+  display = 'none';
 
   lengthVehicules: number;
+  lengthCars: number;
+  lengthMotos: number;
 
   private vehicleModel: Vehicle = new Vehicle();
 
@@ -27,21 +30,40 @@ export class VehicleComponent implements OnInit {
     this.vehicleService.getVehicleList().subscribe(
       (vehicles) => {
         this.vehicleList = vehicles;
+        this.getLengthVehicleList(this.vehicleList);
       }
-    );
+    );    
   }
-  
-  /*console.log(this.vehicles)
-  this.lengthVehicules = this.vehicles.length;*/
 
-  /*$('#myModal').on('shown.bs.modal', function () {
-    $('#myInput').trigger('focus')
-  })*/
+  public getLengthVehicleList(vehicleList: Vehicle[]): void{
+    this.lengthVehicules = vehicleList.length;
+  }
+
+  public getLengthCars(vehicleList: Vehicle[]): void{
+
+  }
+
+  public getLengthMotos(vehicleList: Vehicle[]): void{
+
+  }
 
   public createdVehicleRegister(): void{
-    console.log(this.vehicleModel)
-    this.vehicleService.createVehicle(this.vehicleModel).subscribe();
-    this.vehicleList.push(this.vehicleModel)
+    this.vehicleService.createVehicle(this.vehicleModel).subscribe((response) => {
+      this.vehicleList.push(response)
+      this.hideModal();      
+    }, error => {
+      alert(error.error.message)
+    });
   }
+
+  public openModal(): void{
+    this.display = 'block';
+  }
+
+  public hideModal(): void{
+    this.display = 'none';
+  }
+
+
 
 }
