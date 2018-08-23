@@ -4,57 +4,98 @@
       <h1>Total vehiculos: {{ lengthVehicules }}</h1>
     </div>
     <div class="col col-lg-6 text-right" style="padding-top: 12px;">
-      <button type="button" class="btn btn-primary">Nuevo ingreso</button>
-    </div>    
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#idVehicleModal">
+        Nuevo ingreso
+      </button>
+    </div>
   </div>
   <!--<div>-->
-    <div class="row my-4 vehicle-style">
-      <div class="col col-lg-1 bold">
-        PLACA
-      </div>
-      <div class="col col-lg-2 bold">
-        CILINDRAJE(CC)
-      </div>
-      <div class="col col-lg-2 bold">
-        FECHA INGRESO
-      </div>
-      <div class="col col-lg-2 bold">
-        FECHA SALIDA
-      </div>
-      <div class="col col-lg-2 bold">
-        TIPO
+  <div class="row my-4 vehicle-style">
+    <div class="col col-lg-1 bold">
+      PLACA
+    </div>
+    <div class="col col-lg-2 bold">
+      CILINDRAJE(CC)
+    </div>
+    <div class="col col-lg-2 bold">
+      FECHA INGRESO
+    </div>
+    <div class="col col-lg-2 bold">
+      FECHA SALIDA
+    </div>
+    <div class="col col-lg-2 bold">
+      TIPO
+    </div>
+  </div>
+  <div class="row" *ngFor="let vehicle of vehicleList" style="border: solid 1px gray;padding: 20px 0; margin-top: 20px;">
+    <div class="col col-lg-1">
+      <label for="" style="font-size: 12px;">{{ vehicle.placa }}</label>
+    </div>
+    <div class="col col-lg-2">
+      <label for="" style="font-size: 12px;">{{ vehicle.cilindraje }}</label>
+    </div>
+    <div class="col col-lg-2">
+      <label for="" style="font-size: 12px;">{{ vehicle.fechaIngreso | date : 'M/d/yy h:mm a' }}</label>
+    </div>
+    <div class="col col-lg-2">
+      <label for="" style="font-size: 12px;">{{ vehicle.fechaSalida | date : 'M/d/yy h:mm a' }}</label>
+    </div>
+    <div class="col col-lg-1" *ngIf="vehicle.tipo==1;">
+      <i class="fa fa-car" aria-hidden="true"></i>
+    </div>
+    <div class="col col-lg-1" *ngIf="vehicle.tipo==2;">
+      <i class="fa fa-motorcycle" aria-hidden="true"></i>
+    </div>
+    <div class="col col-lg-1">
+      <button type="button" class="btn btn-danger">Pago</button>
+    </div>
+    <div class="col col-lg-2">
+      <label style="font-size: 12px;">Costo parqueadero: $ 12000</label>
+    </div>
+    <div class="col col-lg-1">
+      <i class="fa fa-pencil" aria-hidden="true"></i>
+    </div>
+  </div>
+  <!--</div>-->
+  <!-- Modal agregar nuevo registro -->
+  <div class="modal fade" id="idVehicleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo ingreso vehiculo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <!-- input placa-->
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Placa:</label>
+              <input type="text" class="form-control" [(ngModel)]="vehicleModel.placa" name="placa">
+            </div>
+            <!-- input cilindraje-->
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Cilindraje:</label>
+              <input type="number" class="form-control" [(ngModel)]="vehicleModel.cilindraje" name="cilindraje">
+            </div>
+            <!-- input tipo vehiculo (carro, moto)-->
+            <div class="form-group">
+              <label for="tipo" class="col-form-label col-sm-2">Tipo</label>
+              <select [(ngModel)]="vehicleModel.tipo" class="form-control" name="tipo">
+                <option *ngFor="let tipo of tipos" [value]="tipo.id">
+                  {{tipo.description}}
+                </option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" role="button" class="btn btn-primary" (click)='createdVehicleRegister()'>Guardar</button>
+        </div>
       </div>
     </div>
-    <div class="row" *ngFor="let vehicle of vehicles" style="border: solid 1px gray;padding: 20px 0; margin-top: 20px;">
-      <div class="col col-lg-1">
-        {{ vehicle.placa }}
-      </div>
-      <div class="col col-lg-2">
-        {{ vehicle.cilindraje }}
-      </div>
-      <div class="col col-lg-2">
-        {{ vehicle.fechaIngreso | date : 'M/d/yy h:mm a' }}
-      </div>
-      <div class="col col-lg-2">
-        {{ vehicle.fechaSalida | date : 'M/d/yy h:mm a' }}
-      </div>
-      <div class="col col-lg-1" *ngIf="vehicle.tipo==1;">
-          <i class="fa fa-car" aria-hidden="true"></i>
-      </div>
-      <div class="col col-lg-1" *ngIf="vehicle.tipo==2;">
-          <i class="fa fa-motorcycle" aria-hidden="true"></i>
-      </div>
-      <div class="col col-lg-1">        
-        <i class="fa fa-pencil" aria-hidden="true"></i>
-      </div>
-      <div class="col col-lg-2">
-        <button type="button" class="btn btn-danger">Calcular pago</button>
-      </div>
-      <div class="row">
-          <div class="col col-lg-12" style="margin-left: 10px;">
-            <h3>Costo parqueadero: $ 12000</h3>
-          </div>
-        </div>      
-    </div>   
-  <!--</div>-->
+  </div>
+
 </div>

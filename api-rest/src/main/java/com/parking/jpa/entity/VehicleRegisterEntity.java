@@ -36,7 +36,7 @@ public class VehicleRegisterEntity implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaSalida;
 
-	@Column(nullable = true)
+	//@Column(nullable = true)
 	private long costo;
 
 	@PrePersist
