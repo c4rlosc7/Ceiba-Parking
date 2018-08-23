@@ -24,8 +24,6 @@ public class VehicleRegisterServiceImplement implements IVehicleRegisterService 
 	@Autowired
 	private IVehicleRegisterRepository vehicleRepository;
 	
-	private ConvertDomainToEntity convert;
-	
 	private Watchman v;
 	
 	@PostConstruct
@@ -42,7 +40,7 @@ public class VehicleRegisterServiceImplement implements IVehicleRegisterService 
 	@Override
 	@Transactional
 	public VehicleRegisterEntity saveVehicleRegister(VehicleRegisterEntity vehicle) {
-		VehicleRegister registroDomain = convert.convertEntityToDomain(vehicle);
+		VehicleRegister registroDomain = ConvertDomainToEntity.convertEntityToDomain(vehicle);
 		v.validateInRegister(registroDomain);
 		return vehicleRepository.save(vehicle);
 	}
@@ -72,12 +70,15 @@ public class VehicleRegisterServiceImplement implements IVehicleRegisterService 
 
 	@Override
 	@Transactional
-	public VehicleRegisterEntity calculateFee(VehicleRegisterEntity vehicle) {
+	public VehicleRegisterEntity calculateFee(Long id) {
+		VehicleRegisterEntity vehicleUpdate = findById(id);
 		Instant instant = LocalDateTime.now().toInstant(ZoneOffset.UTC);
-		vehicle.setFechaSalida(Date.from(instant));
-		VehicleRegister registroDomain = convert.convertEntityToDomain(vehicle);
+		vehicleUpdate.setFechaSalida(Date.from(instant));
+		VehicleRegister registroDomain = ConvertDomainToEntity.convertEntityToDomain(vehicleUpdate);
 		v.calculo(registroDomain);
-		return convert.convertDomainToEntity(registroDomain);
+		VehicleRegisterEntity vehicleUpdate2 = ConvertDomainToEntity.convertDomainToEntity(registroDomain);
+		vehicleUpdate2.setId(vehicleUpdate.getId());
+		return vehicleRepository.save(vehicleUpdate2);
 	}
 
 

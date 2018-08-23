@@ -22,8 +22,18 @@ export class VehicleService {
     );
   }
 
-  createVehicle(vehicle: Vehicle): Observable<Vehicle> {
+  createVehicleRegister(vehicle: Vehicle): Observable<Vehicle> {
     return this.http.post<Vehicle>(this.urlEndPoint + "/add", JSON.stringify(vehicle), { headers: this.httpHeaders });
   }
+
+  updateVehicleRegister(vehicle: Vehicle): Observable<Vehicle>{
+    return this.http.put<Vehicle>(`${this.urlEndPoint}/${vehicle.id}`, vehicle, { headers: this.httpHeaders });
+  }
+
+  calculateFee(vehicle: Vehicle): Observable<Vehicle>{
+    return this.http.put<Vehicle>(`${this.urlEndPoint}/${vehicle.id}`, vehicle, { headers: this.httpHeaders });
+  }
+
+
 
 }

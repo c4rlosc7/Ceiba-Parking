@@ -75,10 +75,10 @@ public class VehicleRegisterController {
 	 * Calculo del costo del parquedo
 	 * @return
 	 */
-	@PostMapping("/calculate")
+	@PutMapping("/calculate/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public VehicleRegisterEntity calculateFee(@RequestBody VehicleRegisterEntity vehicle) {
-		return vehicleService.calculateFee(vehicle);
+	public VehicleRegisterEntity calculateFee(@PathVariable Long id) {
+		return vehicleService.calculateFee(id);
 	}
 	
 }

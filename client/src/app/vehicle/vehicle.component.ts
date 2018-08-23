@@ -70,10 +70,37 @@ export class VehicleComponent implements OnInit {
     this.lengthMotos = count;
   }
 
+  /**
+   * 
+   */
   public createdVehicleRegister(): void{
-    this.vehicleService.createVehicle(this.vehicleModel).subscribe((response) => {
+    this.vehicleService.createVehicleRegister(this.vehicleModel).subscribe((response) => {
       this.vehicleList.push(response)
       this.hideModal();      
+    }, error => {
+      alert(error.error.message)
+    });
+  }
+
+  /**
+   * 
+   */
+  public updateVehicleRegister(): void{
+    this.vehicleService.updateVehicleRegister(this.vehicleModel).subscribe((response) => {
+      this.vehicleModel = response;
+      this.hideModal();
+    }, error => {
+      alert(error.error.message)
+    });
+  }
+
+  /**
+   * 
+   */
+  public calculateFee(): void{
+    this.vehicleService.calculateFee(this.vehicleModel).subscribe((response) => {
+      this.vehicleModel = response;
+      this.hideModal();
     }, error => {
       alert(error.error.message)
     });
