@@ -26,11 +26,21 @@ export class VehicleComponent implements OnInit {
 
   constructor(private vehicleService: VehicleService) { }
 
+  public openModal(): void{
+    this.display = 'block';
+  }
+
+  public hideModal(): void{
+    this.display = 'none';
+  }
+
   ngOnInit() {
     this.vehicleService.getVehicleList().subscribe(
       (vehicles) => {
         this.vehicleList = vehicles;
         this.getLengthVehicleList(this.vehicleList);
+        this.getLengthCars(this.vehicleList);
+        this.getLengthMotos(this.vehicleList);
       }
     );    
   }
@@ -40,11 +50,24 @@ export class VehicleComponent implements OnInit {
   }
 
   public getLengthCars(vehicleList: Vehicle[]): void{
-
+    let count = 0;
+    for (let index = 0; index < vehicleList.length; index++) {
+      if( vehicleList[index].tipo == 1){
+        count++
+      }
+    }
+    this.lengthCars = count
+    console.log(this.lengthCars)
   }
 
   public getLengthMotos(vehicleList: Vehicle[]): void{
-
+    let count = 0;
+    for (let index = 0; index < vehicleList.length; index++) {      
+      if(vehicleList[index].tipo == 2){
+        count++
+      }
+    }
+    this.lengthMotos = count;
   }
 
   public createdVehicleRegister(): void{
@@ -55,15 +78,5 @@ export class VehicleComponent implements OnInit {
       alert(error.error.message)
     });
   }
-
-  public openModal(): void{
-    this.display = 'block';
-  }
-
-  public hideModal(): void{
-    this.display = 'none';
-  }
-
-
 
 }

@@ -24,13 +24,13 @@ public class Watchman implements IWatchman {
 
 	public static final int MAX_CARROS = 20;
 	public static final int MAX_MOTOS = 10;
-	
+
 	public static final int HORAS_MAX = 9;
-	public static final char CARACTER_A = 'A';	
-	
+	public static final char CARACTER_A = 'A';
+
 	public static final int DIA_DOMINGO = 1;
 	public static final int DIA_LUNES = 2;
-	
+
 	public static final int COSTO_X_HORA_CARRO = 1000;
 	public static final int COSTO_X_HORA_MOTO = 500;
 	public static final int COSTO_X_DIA_CARRO = 8000;
@@ -48,6 +48,7 @@ public class Watchman implements IWatchman {
 
 	/**
 	 * Constructor con parametros
+	 * 
 	 * @param vehicleRepository
 	 */
 	public Watchman(IVehicleRegisterRepository vehicleRepository) {
@@ -56,43 +57,49 @@ public class Watchman implements IWatchman {
 
 	/**
 	 * Valida regla del negocio si la placa inicia por la letra "A"
+	 * 
 	 * @param placa
 	 */
 	public void authorizedPlate(String placa) {
 		char letter = placa.charAt(0);
 		if (letter == CARACTER_A) authorizedDay();
 	}
-	
+
 	/**
-	 * Método que valida el día que va a ingresar el vehiculo, si esta autorizado a entrar
+	 * Método que valida el día que va a ingresar el vehiculo, si esta autorizado a
+	 * entrar
 	 */
 	public void authorizedDay() {
-        Date today = new Date();
-        Calendar c = Calendar.getInstance();
-        c.setTime(today);
-        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);        
-        if(dayOfWeek != DIA_DOMINGO && dayOfWeek != DIA_LUNES) {
-        	throw new ParkingException(INGRESO_NO_AUTORIZADO);
-        }
+		Date today = new Date();
+		Calendar c = Calendar.getInstance();
+		c.setTime(today);
+		int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+		if (dayOfWeek != DIA_DOMINGO && dayOfWeek != DIA_LUNES) {
+			throw new ParkingException(INGRESO_NO_AUTORIZADO);
+		}
 	}
 
 	/**
 	 * Método que valida el espacio disponible de carros o motos
+	 * 
 	 * @param tipo
 	 */
 	public void availableSpace(int type) {
 		int numVehicles = 0;
 		if (type == CARRO) {
 			numVehicles = vehicleRepository.findAllCars();
-			if (numVehicles >= 20) throw new ParkingException(NO_HAY_ESPACIO_PARA_CARRO);
+			if (numVehicles >= 20)
+				throw new ParkingException(NO_HAY_ESPACIO_PARA_CARRO);
 		} else if (type == MOTO) {
 			numVehicles = vehicleRepository.findAllMotorcycles();
-			if (numVehicles >= 10) throw new ParkingException(NO_HAY_ESPACIO_PARA_MOTO);
+			if (numVehicles >= 10)
+				throw new ParkingException(NO_HAY_ESPACIO_PARA_MOTO);
 		}
 	}
 
 	/**
 	 * Implementa las reglas del negocio
+	 * 
 	 * @param register
 	 */
 	@Override
@@ -106,35 +113,39 @@ public class Watchman implements IWatchman {
 	 */
 	@Override
 	public long getDaysBetweenTwoDays(Date d1, Date d2) {
-        long difference = ( d1.getTime() - d2.getTime() ) / 8640000; // milliseconds in a day
-        return Math.abs(difference/10);
+		long time = Math.abs(d1.getTime() - d2.getTime());
+		return TimeUnit.MILLISECONDS.toDays(time);
 	}
+	
 
 	/**
 	 * Método que retorn la diferencia entre 2 fechas en horas
 	 */
 	@Override
 	public long getHoursBetweenTwoDays(Date d1, Date d2) {
-        long time = Math.abs(d1.getTime() - d2.getTime());
-        long hours = TimeUnit.MILLISECONDS.toHours(time);        		
-        return hours + 1;
+		long time = Math.abs(d1.getTime() - d2.getTime());
+		long hours = TimeUnit.MILLISECONDS.toHours(time);
+		return hours + 1;
 	}
 
 	@Override
 	public VehicleRegister calculo(VehicleRegister register) {
 		long hours = getHoursBetweenTwoDays(register.getFechaIngreso(), register.getFechaSalida());
-		System.out.println(hours);
-		if(hours < HORAS_MAX) {
-			if(register.getTipo() == CARRO) {
+		if (hours < HORAS_MAX) {
+			if (register.getTipo() == CARRO) {
 				register.setCosto(hours * COSTO_X_HORA_CARRO);
-			}else if(register.getTipo() == MOTO) {
+			} else if (register.getTipo() == MOTO) {
 				register.setCosto(hours * COSTO_X_HORA_MOTO);
 			}
-		}else {
-			
+		} else {
+			long days = getDaysBetweenTwoDays(register.getFechaIngreso(), register.getFechaSalida());
+			if (register.getTipo() == CARRO) {
+				register.setCosto(days * COSTO_X_DIA_CARRO);
+			} else if (register.getTipo() == MOTO) {
+				register.setCosto(days * COSTO_X_DIA_MOTO);
+			}
 		}
 		return register;
 	}
-
 
 }

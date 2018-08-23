@@ -72,7 +72,7 @@ public class VehicleRegisterServiceImplement implements IVehicleRegisterService 
 
 	@Override
 	@Transactional
-	public VehicleRegisterEntity calculateFee(VehicleRegisterEntity vehicle, Long id) {
+	public VehicleRegisterEntity calculateFee(VehicleRegisterEntity vehicle) {
 		Instant instant = LocalDateTime.now().toInstant(ZoneOffset.UTC);
 		vehicle.setFechaSalida(Date.from(instant));
 		VehicleRegister registroDomain = convert.convertEntityToDomain(vehicle);

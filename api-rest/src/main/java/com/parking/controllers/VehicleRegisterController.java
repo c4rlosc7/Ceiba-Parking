@@ -77,8 +77,8 @@ public class VehicleRegisterController {
 	 */
 	@PostMapping("/calculate")
 	@ResponseStatus(HttpStatus.OK)
-	public VehicleRegisterEntity calculateFee(@RequestBody VehicleRegisterEntity vehicle, Long id) {
-		return vehicleService.calculateFee(vehicle, id);
+	public VehicleRegisterEntity calculateFee(@RequestBody VehicleRegisterEntity vehicle) {
+		return vehicleService.calculateFee(vehicle);
 	}
 	
 }

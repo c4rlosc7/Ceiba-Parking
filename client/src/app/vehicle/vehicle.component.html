@@ -10,8 +10,8 @@
     </div>
   </div>
   <div class="row">
-    <div class="col col-lg-3 cars-length">Total carros: 10</div>
-    <div class="col col-lg-3 moto-length">Total motos: 12</div>
+    <div class="col col-lg-3 cars-length">Total carros: {{ lengthCars }}</div>
+    <div class="col col-lg-3 moto-length">Total motos: {{ lengthMotos }}</div>
   </div>
   <!--<div>-->
   <div class="row my-4 vehicle-style">
@@ -57,7 +57,7 @@
       <button type="button" class="btn btn-danger">Pago</button>
     </div>
     <div class="col col-lg-2">
-      <label style="font-size: 12px;">Costo parqueadero: $ 12000</label>
+      <label style="font-size: 12px;">Costo parqueadero: $ {{ vehicle.costo }}</label>
     </div>
     <div class="col col-lg-1">
       <i class="fa fa-pencil" aria-hidden="true"></i>
