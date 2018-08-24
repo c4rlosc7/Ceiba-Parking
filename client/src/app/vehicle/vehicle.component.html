@@ -16,7 +16,7 @@
   <!--<div>-->
   <div class="row my-4 vehicle-style">
     <div class="col col-lg-1 bold">
-      PLACA
+      #PLACA
     </div>
     <div class="col col-lg-2 bold">
       CILINDRAJE(CC)
@@ -34,9 +34,9 @@
       COSTO PARQUEADERO
     </div>    
   </div>
-  <div class="row" *ngFor="let vehicle of vehicleList" style="border: solid 1px gray;padding: 20px 0; margin-top: 20px;">
+  <div class="row" *ngFor="let vehicle of vehicleList; let idx = index" style="border: solid 1px gray;padding: 20px 0; margin-top: 20px;">
     <div class="col col-lg-1">
-      <label for="" style="font-size: 12px;">{{ vehicle.placa }}</label>
+      <label for="" style="font-size: 12px;">{{idx+1}} {{ vehicle.placa }}</label>
     </div>
     <div class="col col-lg-2">
       <label for="" style="font-size: 12px;">{{ vehicle.cilindraje }}</label>
@@ -54,7 +54,7 @@
       <i class="fa fa-motorcycle" aria-hidden="true"></i>
     </div>
     <div class="col col-lg-1">
-      <button type="button" class="btn btn-danger">Pago</button>
+      <button type="button" class="btn btn-danger" (click)="calculateFee(vehicle, idx)">Pago</button>
     </div>
     <div class="col col-lg-2">
       <label style="font-size: 12px;">Costo parqueadero: $ {{ vehicle.costo }}</label>

@@ -26,14 +26,6 @@ export class VehicleComponent implements OnInit {
 
   constructor(private vehicleService: VehicleService) { }
 
-  public openModal(): void{
-    this.display = 'block';
-  }
-
-  public hideModal(): void{
-    this.display = 'none';
-  }
-
   ngOnInit() {
     this.vehicleService.getVehicleList().subscribe(
       (vehicles) => {
@@ -42,28 +34,53 @@ export class VehicleComponent implements OnInit {
         this.getLengthCars(this.vehicleList);
         this.getLengthMotos(this.vehicleList);
       }
-    );    
+    );
   }
 
-  public getLengthVehicleList(vehicleList: Vehicle[]): void{
+  /**
+ * Abre el modal de agregar
+ */
+  public openModal(): void {
+    this.display = 'block';
+  }
+
+  /**
+   * Oculta el modal de agregar
+   */
+  public hideModal(): void {
+    this.display = 'none';
+  }
+
+  /**
+   * Calcula el total de vehiculos registrados en el parqueadero
+   * @param vehicleList 
+   */
+  public getLengthVehicleList(vehicleList: Vehicle[]): void {
     this.lengthVehicules = vehicleList.length;
   }
 
-  public getLengthCars(vehicleList: Vehicle[]): void{
+  /**
+   * Calcular el total de carros ingresados en el parqueadero
+   * @param vehicleList 
+   */
+  public getLengthCars(vehicleList: Vehicle[]): void {
     let count = 0;
     for (let index = 0; index < vehicleList.length; index++) {
-      if( vehicleList[index].tipo == 1){
+      if (vehicleList[index].tipo == 1) {
         count++
       }
     }
     this.lengthCars = count
-    console.log(this.lengthCars)
   }
 
-  public getLengthMotos(vehicleList: Vehicle[]): void{
+  /**
+   * Obtiene el total de motos ingresadas en el parqueadero
+   * @param vehicleList 
+   */
+  public getLengthMotos(vehicleList: Vehicle[]): void {
     let count = 0;
-    for (let index = 0; index < vehicleList.length; index++) {      
-      if(vehicleList[index].tipo == 2){
+    for (let index = 0; index < vehicleList.length; index++) {
+      if (vehicleList[index].tipo == 2) {
         count++
       }
     }
@@ -71,21 +88,21 @@ export class VehicleComponent implements OnInit {
   }
 
   /**
-   * 
+   * Crea un nuevo registro de parqueadero
    */
-  public createdVehicleRegister(): void{
+  public createdVehicleRegister(): void {
     this.vehicleService.createVehicleRegister(this.vehicleModel).subscribe((response) => {
       this.vehicleList.push(response)
-      this.hideModal();      
+      this.hideModal();
     }, error => {
       alert(error.error.message)
     });
   }
 
   /**
-   * 
+   * Actualiza el registro del ingreso al parqueadero
    */
-  public updateVehicleRegister(): void{
+  public updateVehicleRegister(): void {
     this.vehicleService.updateVehicleRegister(this.vehicleModel).subscribe((response) => {
       this.vehicleModel = response;
       this.hideModal();
@@ -95,11 +112,11 @@ export class VehicleComponent implements OnInit {
   }
 
   /**
-   * 
+   * Calcula el costo del parqueadero
    */
-  public calculateFee(): void{
-    this.vehicleService.calculateFee(this.vehicleModel).subscribe((response) => {
-      this.vehicleModel = response;
+  public calculateFee(v: Vehicle, index: number): void {
+    this.vehicleService.calculateFee(v.id).subscribe((response) => {
+      this.vehicleList[index] = response;
       this.hideModal();
     }, error => {
       alert(error.error.message)
