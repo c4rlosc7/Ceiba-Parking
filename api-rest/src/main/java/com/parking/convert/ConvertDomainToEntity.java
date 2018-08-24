@@ -11,48 +11,54 @@ public class ConvertDomainToEntity {
 	
 	/**
 	 * Método que convierte una entidad a un dominio
-	 * @param vehiculoEntity
+	 * @param vehicleEntity
 	 * @return
 	 */
-	public static VehicleRegister convertEntityToDomain(VehicleRegisterEntity vehiculoEntity) {
-		VehicleRegister vehiculo = null;
-		if(vehiculoEntity != null) {
-			vehiculo = new VehicleRegister(vehiculoEntity.getPlaca(), vehiculoEntity.getCilindraje(), 
-									vehiculoEntity.getTipo(), vehiculoEntity.getFechaIngreso(), 
-									vehiculoEntity.getFechaSalida(), vehiculoEntity.getCosto());
+	public static VehicleRegister convertEntityToDomain(VehicleRegisterEntity vehicleEntity) {
+		VehicleRegister vehicle = null;
+		if(vehicleEntity != null) {
+			vehicle = new VehicleRegister(vehicleEntity.getPlaca(), 
+										   vehicleEntity.getCilindraje(), 
+										   vehicleEntity.getTipo(), 
+										   vehicleEntity.getFechaIngreso(), 
+										   vehicleEntity.getFechaSalida(), 
+										   vehicleEntity.getCosto());
 		}
-		return vehiculo;
+		return vehicle;
 	}
 	
 	/**
-	 * Método que convierte una lista de entidades a una lista de dominio
-	 * @param vehiculolistaEntity
+	 * Método que convierte una list de entidades a una list de dominio
+	 * @param vehiclelistEntity
 	 * @return
 	 */
-	public static List<VehicleRegister> convertEntityToDomainList(List<VehicleRegisterEntity> vehiculolistaEntity) {
-		List<VehicleRegister> lista = null;
-		if(vehiculolistaEntity != null) {
-			for(int index = 0; index < vehiculolistaEntity.size(); index ++) {
-				lista.add(convertEntityToDomain(vehiculolistaEntity.get(index)));
+	public static List<VehicleRegister> convertEntityToDomainList(List<VehicleRegisterEntity> vehiclelistEntity) {
+		List<VehicleRegister> list = null;
+		if(vehiclelistEntity != null) {
+			for(int index = 0; index < vehiclelistEntity.size(); index ++) {
+				list.add(convertEntityToDomain(vehiclelistEntity.get(index)));
 			}
 		}
-		return lista;
+		return list;
 	}	
 	
 	/**
 	 * Método que convierte un dominio a una entidad
-	 * @param vehiculo
+	 * @param vehicle
 	 * @return
 	 */
-	public static VehicleRegisterEntity convertDomainToEntity(VehicleRegister vehiculo) {
-		VehicleRegisterEntity vehiculoEntity = new VehicleRegisterEntity();
-		vehiculoEntity.setPlaca(vehiculo.getPlaca());
-		vehiculoEntity.setCilindraje(vehiculo.getCilindraje());
-		vehiculoEntity.setTipo(vehiculo.getTipo());
-		vehiculoEntity.setFechaIngreso(vehiculo.getFechaIngreso());
-		vehiculoEntity.setFechaSalida(vehiculo.getFechaSalida());
-		vehiculoEntity.setCosto(vehiculo.getCosto());
-		return vehiculoEntity;
+	public static VehicleRegisterEntity convertDomainToEntity(VehicleRegister vehicle) {
+		
+		VehicleRegisterEntity vehicleEntity = new VehicleRegisterEntity();
+		
+		vehicleEntity.setPlaca(vehicle.getPlaca());
+		vehicleEntity.setCilindraje(vehicle.getCilindraje());
+		vehicleEntity.setTipo(vehicle.getTipo());
+		vehicleEntity.setFechaIngreso(vehicle.getFechaIngreso());
+		vehicleEntity.setFechaSalida(vehicle.getFechaSalida());
+		vehicleEntity.setCosto(vehicle.getCosto());
+		
+		return vehicleEntity;
 	}	
 
 }

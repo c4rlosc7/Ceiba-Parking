@@ -13,6 +13,7 @@ public class VehicleRegister {
 	
 	public VehicleRegister() {		
 	}
+
 	
 	/* Constructor con parametros */
 	public VehicleRegister(String placa, String cilindraje, int tipo, Date fechaIngreso, Date fechaSalida, long costo) {
