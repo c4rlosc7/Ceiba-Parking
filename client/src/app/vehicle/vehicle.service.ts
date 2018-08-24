@@ -26,8 +26,8 @@ export class VehicleService {
     return this.http.post<Vehicle>(this.urlEndPoint + "/add", JSON.stringify(vehicle), { headers: this.httpHeaders });
   }
 
-  updateVehicleRegister(vehicle: Vehicle): Observable<Vehicle>{
-    return this.http.put<Vehicle>(`${this.urlEndPoint}/${vehicle.id}`, vehicle, { headers: this.httpHeaders });
+  updateVehicleRegister(vehicle: Vehicle, id: number): Observable<Vehicle>{
+    return this.http.put<Vehicle>(`${this.urlEndPoint + "/update" }/${id}`, vehicle, { headers: this.httpHeaders });
   }
 
   calculateFee(id: number): Observable<Vehicle>{

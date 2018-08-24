@@ -38,9 +38,17 @@ export class VehicleComponent implements OnInit {
   }
 
   /**
- * Abre el modal de agregar
- */
-  public openModal(): void {
+  * Abre el modal de agregar
+  */
+  public openModalCreate(): void {
+    this.vehicleModel = null;
+    this.display = 'block';
+  }
+
+  /**
+  * Abre el modal de actualizar
+  */
+  public openModalUpdate(): void {
     this.display = 'block';
   }
 
@@ -48,6 +56,7 @@ export class VehicleComponent implements OnInit {
    * Oculta el modal de agregar
    */
   public hideModal(): void {
+    this.vehicleModel = null;
     this.display = 'none';
   }
 
@@ -99,11 +108,28 @@ export class VehicleComponent implements OnInit {
     });
   }
 
+
+  public initUpdate(v: Vehicle): void {
+    this.vehicleModel = v;
+    this.openModalUpdate();
+  }
+
+  /**
+   * Gestiona si se requiere guardar o actualizar
+   */
+  public saveVehicleRegister(): void {
+    if (this.vehicleModel.id) {
+      this.updateVehicleRegister();
+    } else {
+      this.createdVehicleRegister();
+    }
+  }
+
   /**
    * Actualiza el registro del ingreso al parqueadero
    */
   public updateVehicleRegister(): void {
-    this.vehicleService.updateVehicleRegister(this.vehicleModel).subscribe((response) => {
+    this.vehicleService.updateVehicleRegister(this.vehicleModel, this.vehicleModel.id).subscribe((response) => {
       this.vehicleModel = response;
       this.hideModal();
     }, error => {

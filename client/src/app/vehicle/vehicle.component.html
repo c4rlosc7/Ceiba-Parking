@@ -4,7 +4,7 @@
       <h1>Total vehiculos: {{ lengthVehicules }}</h1>
     </div>
     <div class="col col-lg-6 text-right" style="padding-top: 12px;">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#idVehicleModal" (click)="openModal()">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#idVehicleModal" (click)="openModalCreate()">
         Nuevo ingreso
       </button>
     </div>
@@ -60,7 +60,7 @@
       <label style="font-size: 12px;">Costo parqueadero: $ {{ vehicle.costo }}</label>
     </div>
     <div class="col col-lg-1">
-      <i class="fa fa-pencil" aria-hidden="true"></i>
+      <i class="fa fa-pencil" aria-hidden="true" (click)="initUpdate(vehicle, idx)" style="cursor: pointer;"></i>
     </div>
   </div>
   <!--</div>-->
@@ -100,7 +100,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="hideModal()">Cancelar</button>
-          <button type="button" role="button" class="btn btn-primary" (click)='createdVehicleRegister()'>Guardar</button>
+          <button type="button" role="button" class="btn btn-primary" (click)='saveVehicleRegister()'>Guardar</button>
         </div>
       </div>
     </div>
