@@ -6,7 +6,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import com.parking.domain.VehicleRegister;
+import com.parking.models.Register;
 import com.parking.testdatabuilder.VehicleRegisterDataBuilder;
 
 public class VehicleRegisterTest {

@@ -2,15 +2,17 @@ package com.parking.domain;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.parking.convert.ConvertDomainToEntity;
+import com.parking.converter.ConvertMTE;
+import com.parking.entity.RegisterEntity;
 import com.parking.exceptions.*;
-import com.parking.jpa.entity.VehicleRegisterEntity;
-import com.parking.models.services.VehicleRegisterServiceImplement;
-import com.parking.repositories.IVehicleRegisterRepository;
+import com.parking.models.Register;
+import com.parking.repositories.IRegisterRepository;
+import com.parking.services.RegisterServiceImplement;
 
 public class Watchman implements IWatchman {
 
@@ -38,7 +40,7 @@ public class Watchman implements IWatchman {
 	public static final int VALOR_ADICIONAL_ALTO_CILIDRAJE = 2000;
 
 	@Autowired
-	private IVehicleRegisterRepository vehicleRepository;
+	private IRegisterRepository vehicleRepository;
 
 	/**
 	 * Constructor sin parametros
@@ -51,7 +53,7 @@ public class Watchman implements IWatchman {
 	 * 
 	 * @param vehicleRepository
 	 */
-	public Watchman(IVehicleRegisterRepository vehicleRepository) {
+	public Watchman(IRegisterRepository vehicleRepository) {
 		this.vehicleRepository = vehicleRepository;
 	}
 
@@ -103,7 +105,7 @@ public class Watchman implements IWatchman {
 	 * @param register
 	 */
 	@Override
-	public void validateInRegister(VehicleRegister register) {
+	public void validateInRegister(Register register) {
 		authorizedPlate(register.getPlaca());
 		availableSpace(register.getTipo());
 	}
@@ -129,7 +131,7 @@ public class Watchman implements IWatchman {
 	}
 
 	@Override
-	public VehicleRegister calculo(VehicleRegister register) {
+	public Register calculo(Register register) {
 		long hours = getHoursBetweenTwoDays(register.getFechaIngreso(), register.getFechaSalida());
 		if (hours < HORAS_MAX) {
 			if (register.getTipo() == CARRO) {

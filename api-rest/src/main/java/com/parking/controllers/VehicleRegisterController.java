@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import com.parking.jpa.entity.VehicleRegisterEntity;
-import com.parking.models.services.IVehicleRegisterService;
+
+import com.parking.entity.RegisterEntity;
+import com.parking.services.IRegisterService;
 
 @CrossOrigin(origins = {"*"})
 @RestController
@@ -22,7 +23,7 @@ import com.parking.models.services.IVehicleRegisterService;
 public class VehicleRegisterController {
 
 	@Autowired
-	private IVehicleRegisterService vehicleService;
+	private IRegisterService vehicleService;
 	
 	/**
 	 * Listar registro de vehiculos con la fecha salida en null
@@ -30,8 +31,8 @@ public class VehicleRegisterController {
 	 */
 	@GetMapping("/vehicles")
 	@ResponseStatus(HttpStatus.OK)
-	public List<VehicleRegisterEntity> getListVehicleRegister(){
-		return vehicleService.getListVehicleRegister();
+	public List<RegisterEntity> getRegisterList(){
+		return vehicleService.getListRegister();
 	}
 	
 	/**
@@ -41,8 +42,8 @@ public class VehicleRegisterController {
 	 */
 	@PostMapping("/add")
 	@ResponseStatus(HttpStatus.CREATED)
-	public VehicleRegisterEntity saveVehicleRegister(@RequestBody VehicleRegisterEntity vehicle) {
-		return vehicleService.saveVehicleRegister(vehicle);
+	public RegisterEntity saveVehicleRegister(@RequestBody RegisterEntity vehicle) {
+		return vehicleService.saveRegister(vehicle);
 	}
 	
 	/**
@@ -53,7 +54,7 @@ public class VehicleRegisterController {
 	@DeleteMapping("/delete/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteVehicleRegister(@PathVariable Long id) {
-		vehicleService.deleteVehicleRegister(id);
+		vehicleService.deleteRegister(id);
 	}
 	
 	/**
@@ -63,8 +64,8 @@ public class VehicleRegisterController {
 	 */
 	@PutMapping("/update/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public VehicleRegisterEntity updateVehicleRegister(@RequestBody VehicleRegisterEntity vehicle, @PathVariable Long id) {
-		return vehicleService.updatedVehicleRegister(vehicle, id);
+	public RegisterEntity updateVehicleRegister(@RequestBody RegisterEntity vehicle, @PathVariable Long id) {
+		return vehicleService.updatedRegister(vehicle, id);
 	}
 	
 	/**
@@ -73,7 +74,7 @@ public class VehicleRegisterController {
 	 */
 	@PutMapping("/calculate/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public VehicleRegisterEntity calculateFee(@PathVariable Long id) {
+	public RegisterEntity calculateFee(@PathVariable Long id) {
 		return vehicleService.calculateFee(id);
 	}
 	

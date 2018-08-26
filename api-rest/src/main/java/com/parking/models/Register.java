@@ -1,9 +1,10 @@
-package com.parking.domain;
+package com.parking.models;
 
 import java.util.Date;
 
-public class VehicleRegister {
+public class Register {
 	
+	private Long id;
 	private String placa;
 	private String cilindraje;
 	private int tipo;
@@ -11,12 +12,13 @@ public class VehicleRegister {
 	private Date fechaSalida;
 	private long costo;
 	
-	public VehicleRegister() {		
+	public Register() {		
 	}
 
 	
 	/* Constructor con parametros */
-	public VehicleRegister(String placa, String cilindraje, int tipo, Date fechaIngreso, Date fechaSalida, long costo) {
+	public Register(Long id, String placa, String cilindraje, int tipo, Date fechaIngreso, Date fechaSalida, long costo) {
+		this.id = id;
 		this.placa = placa;
 		this.cilindraje = cilindraje;
 		this.tipo = tipo;
@@ -26,6 +28,12 @@ public class VehicleRegister {
 	}
 	
 	/* Getters y Setters */
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}	
 	public String getPlaca() {
 		return placa;
 	}

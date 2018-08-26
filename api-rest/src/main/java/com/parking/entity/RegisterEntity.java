@@ -1,4 +1,4 @@
-package com.parking.jpa.entity;
+package com.parking.entity;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -17,7 +17,21 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "vehiculos")
-public class VehicleRegisterEntity implements Serializable {
+public class RegisterEntity implements Serializable {
+	
+	public RegisterEntity() {
+		
+	}
+	
+	public RegisterEntity(long id, String placa, String cilindraje, int tipo, Date fechaIngreso, Date fechaSalida, long costo) {
+		this.id = id;
+		this.placa = placa;
+		this.cilindraje = cilindraje;
+		this.tipo = tipo;
+		this.fechaIngreso = fechaIngreso;
+		this.fechaSalida = fechaSalida;
+		this.costo = costo;
+	}
 
 	private static final long serialVersionUID = 1L;
 
