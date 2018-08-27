@@ -81,7 +81,7 @@ post {
   success {      
     echo 'Esto correrá solo si se ejecuta satisfactoriamente'   
     // Se ejecutará correctamente, siempre y cuando exista la ruta expuesta
-    junit '**/build/test-results/test/*.xml'
+    junit '**/build/test-results/*.xml'
   }    
   failure {      
     echo 'This will run only if failed' 
