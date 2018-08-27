@@ -57,14 +57,15 @@ public class RegisterTest {
 		
 	}
 	
-	/*@Test
+	@Test
 	public void testGetList() {		
 		controller.getRegisterList();
 		int resultadoEsperado = 23;
+		System.out.println("GETTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+		System.out.println(controller.getRegisterList().size());
 		int resultado = controller.getRegisterList().size();
-		System.out.println("----------------------------------------------------");
 		assertEquals(resultadoEsperado, resultado);
-	}*/
+	}
 	
 	@Test
 	public void testSaveVehicleRegister() {
@@ -81,29 +82,41 @@ public class RegisterTest {
 		controller.saveRegister(converter.convertModelToEntity(vehicle));
 		assertNotNull(controller.saveRegister(converter.convertModelToEntity(vehicle)));
 	}
-
-	/*@Test
-	public void testDeleteRegister() {
-		long id = 1;
-		controller.deleteRegister(id);
-		assertTrue(true);
-	}*/
 	
 	@Test
 	public void testUpdateRegister() {
 		long id = 1;
-		controller.deleteRegister(id);
-		assertTrue(true);
+		
+		RegisterDataBuilder registerDataBuilder = new RegisterDataBuilder();
+		
+		registerDataBuilder.setPlaca(PLACA);
+		registerDataBuilder.setCilindraje(CILINDRAJE);
+		registerDataBuilder.setTipo(TIPO);
+		registerDataBuilder.setFechaEntrada(FECHA_ENTRADA);
+		registerDataBuilder.setFechaSalida(FECHA_SALIDA);
+		registerDataBuilder.setCosto(COSTO);
+		
+		Register vehicleUpdate = registerDataBuilder.build();	
+		controller.saveRegister(converter.convertModelToEntity(vehicleUpdate));
+		
+		vehicleUpdate.setCosto(10000);
+		
+		ConvertMTE.convertEntityToModel(controller.updateRegister(converter.convertModelToEntity(vehicleUpdate), (long) 1));
+		int resultadoEsperado = 10000;
+		System.out.println("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
+		System.out.println(vehicleUpdate.getCosto());
+		assertTrue(resultadoEsperado == vehicleUpdate.getCosto());
 	}
 	
-	/*@Test
+	@Test
 	public void testCalculateFee() {
 		long id = 1;
+		System.out.println(controller.calculateFee(id));
 		Register vehicle = ConvertMTE.convertEntityToModel(controller.calculateFee(id));
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println("---------------------------------------------------------");
 		System.out.println(vehicle);
-		assertTrue(true);
-	}*/
+		assertNotNull(vehicle.getCosto());
+	}
 	
 }
 
