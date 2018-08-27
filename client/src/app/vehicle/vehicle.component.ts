@@ -41,7 +41,8 @@ export class VehicleComponent implements OnInit {
   * Abre el modal de agregar
   */
   public openModalCreate(): void {
-    this.vehicleModel = null;
+    //debugger
+    //this.vehicleModel = null;
     this.display = 'block';
   }
 
@@ -56,7 +57,7 @@ export class VehicleComponent implements OnInit {
    * Oculta el modal de agregar
    */
   public hideModal(): void {
-    this.vehicleModel = null;
+    //this.vehicleModel = null;
     this.display = 'none';
   }
 
@@ -101,6 +102,7 @@ export class VehicleComponent implements OnInit {
    */
   public createdVehicleRegister(): void {
     this.vehicleService.createVehicleRegister(this.vehicleModel).subscribe((response) => {
+      console.log(response)
       this.vehicleList.push(response)
       this.hideModal();
     }, error => {

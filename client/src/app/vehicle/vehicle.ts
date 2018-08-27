@@ -1,7 +1,7 @@
 export class Vehicle {
     id: number;
     placa: String;
-    cilindraje: String;
+    cilindraje: number;
     fechaIngreso: String;
     fechaSalida: String;
     tipo: number;
