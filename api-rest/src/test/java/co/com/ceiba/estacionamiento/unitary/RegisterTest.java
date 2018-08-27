@@ -57,14 +57,14 @@ public class RegisterTest {
 		
 	}
 	
-	@Test
+	/*@Test
 	public void testGetList() {		
 		controller.getRegisterList();
 		int resultadoEsperado = 23;
 		int resultado = controller.getRegisterList().size();
 		System.out.println("----------------------------------------------------");
 		assertEquals(resultadoEsperado, resultado);
-	}
+	}*/
 	
 	@Test
 	public void testSaveVehicleRegister() {
@@ -82,12 +82,12 @@ public class RegisterTest {
 		assertNotNull(controller.saveRegister(converter.convertModelToEntity(vehicle)));
 	}
 
-	@Test
+	/*@Test
 	public void testDeleteRegister() {
 		long id = 1;
 		controller.deleteRegister(id);
 		assertTrue(true);
-	}
+	}*/
 	
 	@Test
 	public void testUpdateRegister() {
@@ -96,14 +96,14 @@ public class RegisterTest {
 		assertTrue(true);
 	}
 	
-	@Test
+	/*@Test
 	public void testCalculateFee() {
 		long id = 1;
 		Register vehicle = ConvertMTE.convertEntityToModel(controller.calculateFee(id));
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		System.out.println(vehicle);
 		assertTrue(true);
-	}
+	}*/
 	
 }
 
