@@ -4,14 +4,14 @@ import java.util.Date;
 
 import co.com.ceiba.estacionamiento.models.Register;
 
-public class VehicleRegisterDataBuilder {
+public class RegisterDataBuilder {
 	
 	private static final Long ID = (long) 1;
 	private static final String PLACA = "XYZ-123";
 	private static final short CILINDRAJE = 700;
 	private static final int TIPO = 2;
-	private static final Date FECHA_ENTRADA = new Date("2018-08-22 00:00:00.01");
-	private static final Date FECHA_SALIDA = new Date("2018-08-22 00:00:00.01");
+	private static final Date FECHA_ENTRADA = new Date();
+	private static final Date FECHA_SALIDA = new Date();
 	private static final long COSTO = 8000;
 	
 	private Long id;
@@ -22,7 +22,7 @@ public class VehicleRegisterDataBuilder {
 	private Date fechaSalida;
 	private long costo;
 	
-	public VehicleRegisterDataBuilder() {
+	public RegisterDataBuilder() {
 		this.id = ID;
 		this.placa = PLACA;
 		this.cilindraje = CILINDRAJE;
