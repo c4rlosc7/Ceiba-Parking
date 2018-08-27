@@ -8,6 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import co.com.ceiba.estacionamiento.controllers.VehicleRegisterController;
+import co.com.ceiba.estacionamiento.converter.ConvertMTE;
+import co.com.ceiba.estacionamiento.domain.RulesParking;
+import co.com.ceiba.estacionamiento.domain.Watchman;
+import co.com.ceiba.estacionamiento.exceptions.ParkingException;
 import co.com.ceiba.estacionamiento.models.Register;
 import co.com.ceiba.estacionamiento.repositories.IRegisterRepository;
 import co.com.ceiba.estacionamiento.testdatabuilder.RegisterDataBuilder;
@@ -26,6 +30,9 @@ public class WatchmanTest {
 	VehicleRegisterController controller;
 
 	private IRegisterRepository vehicleRepository;
+	private ConvertMTE converter;
+	private Watchman watchman = new Watchman();
+	private RulesParking rules;
 	
 	private static final String PLACA = "XYZ-123";
 	private static final short CILINDRAJE = 600;
@@ -50,27 +57,23 @@ public class WatchmanTest {
 		vehicleDataBuilder.setFechaSalida(FECHA_SALIDA);
 		vehicleDataBuilder.setCosto(COSTO);
 		
-		Register vehicle = vehicleDataBuilder.build();		
-		assertEquals(PLACA, vehicle.getPlaca());
-		
+		Register vehicle = vehicleDataBuilder.build();	
+		assertEquals(PLACA, vehicle.getPlaca());		
 	}
 	
 	@Test
-	public void testGetList() {		
-		controller.getRegisterList();
-		int resultadoEsperado = 23;
-		int resultado = controller.getRegisterList().size();
-		assertEquals(resultadoEsperado, resultado);
-	}
-	
-	@Test
-	public void testSaveVehicleRegister() {
+	public void testCylinderGreaterThan500() {
+		boolean respuestaEsperada = true;
+		boolean respuesta = watchman.cylinderGreaterThan500(600);
+		System.out.println(watchman.cylinderGreaterThan500(600));
+		assertTrue(respuesta == respuestaEsperada);
 		
 	}
-
-	@Test
-	public void test() {
-		assertTrue(true);
+	
+	@Test(expected = ParkingException.class)
+	public void testAuthorized() throws ParkingException {
+		String placa = "AAA";
+		rules.authorizedPlate(placa);
 	}
-
+	
 }

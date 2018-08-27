@@ -6,7 +6,7 @@ public class Register {
 	
 	private Long id;
 	private String placa;
-	private short cilindraje;
+	private int cilindraje;
 	private int tipo;
 	private Date fechaIngreso;
 	private Date fechaSalida;
@@ -17,7 +17,7 @@ public class Register {
 
 	
 	/* Constructor con parametros */
-	public Register(Long id, String placa, short cilindraje, int tipo, Date fechaIngreso, Date fechaSalida, long costo) {
+	public Register(Long id, String placa, int cilindraje, int tipo, Date fechaIngreso, Date fechaSalida, long costo) {
 		this.id = id;
 		this.placa = placa;
 		this.cilindraje = cilindraje;
@@ -40,10 +40,10 @@ public class Register {
 	public void setPlaca(String placa) {
 		this.placa = placa;
 	}
-	public short getCilindraje() {
+	public int getCilindraje() {
 		return cilindraje;
 	}
-	public void setCilindraje(short cilindraje) {
+	public void setCilindraje(int cilindraje) {
 		this.cilindraje = cilindraje;
 	}
 	public int getTipo() {

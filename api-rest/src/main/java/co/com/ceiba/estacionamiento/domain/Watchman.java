@@ -59,30 +59,6 @@ public class Watchman implements IWatchman {
 	}
 
 	/**
-	 * Valida regla del negocio si la placa inicia por la letra "A"
-	 * 
-	 * @param placa
-	 */
-	public void authorizedPlate(String placa) {
-		char letter = placa.charAt(0);
-		if (letter == CARACTER_A) authorizedDay();
-	}
-
-	/**
-	 * Método que valida el día que va a ingresar el vehiculo, si esta autorizado a
-	 * entrar
-	 */
-	public void authorizedDay() {
-		Date today = new Date();
-		Calendar c = Calendar.getInstance();
-		c.setTime(today);
-		int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-		if (dayOfWeek != DIA_DOMINGO && dayOfWeek != DIA_LUNES) {
-			throw new ParkingException(INGRESO_NO_AUTORIZADO);
-		}
-	}
-
-	/**
 	 * Método que valida el espacio disponible de carros o motos
 	 * 
 	 * @param tipo
@@ -107,7 +83,7 @@ public class Watchman implements IWatchman {
 	 */
 	@Override
 	public void validateInRegister(Register register) {
-		authorizedPlate(register.getPlaca());
+		RulesParking.authorizedPlate(register.getPlaca());
 		availableSpace(register.getTipo());
 	}
 
@@ -136,7 +112,7 @@ public class Watchman implements IWatchman {
 	 * @param cylinder
 	 * @return
 	 */
-	public boolean cylinderGreaterThan500(short cylinder) {
+	public boolean cylinderGreaterThan500(int cylinder) {
 		return cylinder > CILINDRAE_BASE;
 	}
 	
@@ -149,7 +125,7 @@ public class Watchman implements IWatchman {
 				register.setCosto(hours * COSTO_X_HORA_CARRO);
 			} else if (register.getTipo() == MOTO) {
 				register.setCosto(hours * COSTO_X_HORA_MOTO);
-				if(cylinderGreaterThan500(register.getCilindraje())) register.setCilindraje((short) (register.getCilindraje() + VALOR_ADICIONAL_ALTO_CILIDRAJE));
+				if(cylinderGreaterThan500(register.getCilindraje())) register.setCilindraje( (register.getCilindraje() + VALOR_ADICIONAL_ALTO_CILIDRAJE));
 			}
 		} else {
 			long days = getDaysBetweenTwoDays(register.getFechaIngreso(), register.getFechaSalida());

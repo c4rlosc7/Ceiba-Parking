@@ -42,7 +42,7 @@ public class VehicleRegisterController {
 	 */
 	@PostMapping("/add")
 	@ResponseStatus(HttpStatus.CREATED)
-	public RegisterEntity saveVehicleRegister(@RequestBody RegisterEntity vehicle) {
+	public RegisterEntity saveRegister(@RequestBody RegisterEntity vehicle) {
 		return vehicleService.saveRegister(vehicle);
 	}
 	
@@ -53,7 +53,7 @@ public class VehicleRegisterController {
 	 */
 	@DeleteMapping("/delete/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteVehicleRegister(@PathVariable Long id) {
+	public void deleteRegister(@PathVariable Long id) {
 		vehicleService.deleteRegister(id);
 	}
 	
@@ -64,7 +64,7 @@ public class VehicleRegisterController {
 	 */
 	@PutMapping("/update/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public RegisterEntity updateVehicleRegister(@RequestBody RegisterEntity vehicle, @PathVariable Long id) {
+	public RegisterEntity updateRegister(@RequestBody RegisterEntity vehicle, @PathVariable Long id) {
 		return vehicleService.updatedRegister(vehicle, id);
 	}
 	
