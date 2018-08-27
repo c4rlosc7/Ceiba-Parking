@@ -41,7 +41,7 @@ pipeline {
       steps{        
         echo "------------>Unit Tests<------------"      
         sh 'gradle --b ./api-rest/build.gradle test'
-        sh 'gradle --b ./api-rest/build.gradle cleanTest test'
+        //sh 'gradle --b ./api-rest/build.gradle cleanTest test'
         //junit '**/build/test-results/test/*.xml' //aggregate test results - JUnit
 				//jacoco classPattern:'**/build/classes/java', execPattern:'**/build/jacoco/test.exec', sourcePattern:'**/src/main/java'
       }    
@@ -50,7 +50,7 @@ pipeline {
     stage('Integration Tests') {      
       steps {
         echo "------------>Integration Tests<------------"  
-        //sh 'gradle --b ./api-rest/build.gradle integrationTest'
+        sh 'gradle --b ./api-rest/build.gradle integrationTest'
       }    
     }        
 
