@@ -8,7 +8,7 @@ public class VehicleRegisterDataBuilder {
 	
 	private static final Long ID = (long) 1;
 	private static final String PLACA = "XYZ-123";
-	private static final String CILINDRAJE = "700";
+	private static final short CILINDRAJE = 700;
 	private static final int TIPO = 2;
 	private static final Date FECHA_ENTRADA = new Date("2018-08-22 00:00:00.01");
 	private static final Date FECHA_SALIDA = new Date("2018-08-22 00:00:00.01");
@@ -16,7 +16,7 @@ public class VehicleRegisterDataBuilder {
 	
 	private Long id;
 	private String placa;
-	private String cilindraje;
+	private short cilindraje;
 	private int tipo;
 	private Date fechaEntrada;
 	private Date fechaSalida;
@@ -40,7 +40,7 @@ public class VehicleRegisterDataBuilder {
 		this.placa = placa;
 	}
 
-	public void setCilindraje(String cilindraje) {
+	public void setCilindraje(short cilindraje) {
 		this.cilindraje = cilindraje;
 	}
 

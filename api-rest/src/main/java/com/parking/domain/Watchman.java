@@ -37,6 +37,7 @@ public class Watchman implements IWatchman {
 	public static final int COSTO_X_HORA_MOTO = 500;
 	public static final int COSTO_X_DIA_CARRO = 8000;
 	public static final int COSTO_X_DIA_MOTO = 4000;
+	public static final int CILINDRAE_BASE = 500;
 	public static final int VALOR_ADICIONAL_ALTO_CILIDRAJE = 2000;
 
 	@Autowired
@@ -129,6 +130,16 @@ public class Watchman implements IWatchman {
 		long hours = TimeUnit.MILLISECONDS.toHours(time);
 		return hours + 1;
 	}
+	
+	/**
+	 * Método que evalua si el cilindraje ingresado en el vehiculo procesado es mayor al cilindraje base
+	 * @param cylinder
+	 * @return
+	 */
+	public boolean cylinderGreaterThan500(short cylinder) {
+		return cylinder > CILINDRAE_BASE;
+	}
+	
 
 	@Override
 	public Register calculo(Register register) {

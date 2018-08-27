@@ -143,7 +143,6 @@ export class VehicleComponent implements OnInit {
   public calculateFee(v: Vehicle, index: number): void {
     this.vehicleService.calculateFee(v.id).subscribe((response) => {
       this.vehicleList[index] = response;
-      this.hideModal();
     }, error => {
       alert(error.error.message)
     });

@@ -23,7 +23,7 @@ public class RegisterEntity implements Serializable {
 		
 	}
 	
-	public RegisterEntity(long id, String placa, String cilindraje, int tipo, Date fechaIngreso, Date fechaSalida, long costo) {
+	public RegisterEntity(long id, String placa, short cilindraje, int tipo, Date fechaIngreso, Date fechaSalida, long costo) {
 		this.id = id;
 		this.placa = placa;
 		this.cilindraje = cilindraje;
@@ -39,7 +39,7 @@ public class RegisterEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String placa;
-	private String cilindraje;
+	private short cilindraje;
 	private int tipo;
 
 	@Column(name = "fecha_ingreso")
@@ -76,11 +76,11 @@ public class RegisterEntity implements Serializable {
 		this.placa = placa;
 	}
 
-	public String getCilindraje() {
+	public short getCilindraje() {
 		return cilindraje;
 	}
 
-	public void setCilindraje(String cilindraje) {
+	public void setCilindraje(short cilindraje) {
 		this.cilindraje = cilindraje;
 	}
 
