@@ -9,7 +9,7 @@ import co.com.ceiba.estacionamiento.models.Register;
 
 public class ConvertMTE {
 
-	private ConvertMTE() {
+	public ConvertMTE() {
 	}
 
 	/**

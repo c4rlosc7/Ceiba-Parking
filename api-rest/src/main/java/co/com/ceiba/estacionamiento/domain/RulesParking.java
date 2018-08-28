@@ -27,10 +27,7 @@ public class RulesParking {
 	 */
 	public static boolean authorizedPlate(String placa) {
 		char letter = placa.charAt(0);
-		if (letter == CARACTER_A) {
-			return true;
-		}
-		return false;
+		return letter == CARACTER_A;
 	}
 	
 	/**
@@ -51,16 +48,14 @@ public class RulesParking {
 		Date today = new Date();
 		Calendar c = Calendar.getInstance();
 		c.setTime(today);
-		int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-		return dayOfWeek;
+		return c.get(Calendar.DAY_OF_WEEK);
 	}
 	
 	/**
 	 * Método que retorna la diferencia entre 2 fechas en días
 	 */
 	public static long getDaysBetweenTwoDays(LocalDateTime d1, LocalDateTime d2) {
-		long time = Math.abs(d1.getDayOfYear() - d2.getDayOfYear());
-		return time;
+		return Math.abs(d1.getDayOfYear() - d2.getDayOfYear());
 	}
 	
 
@@ -69,8 +64,7 @@ public class RulesParking {
 	 */
 	public static long getHoursBetweenTwoDays(LocalDateTime d1, LocalDateTime d2) {
 		long time = Math.abs(d1.toInstant(ZoneOffset.UTC).toEpochMilli() - d2.toInstant(ZoneOffset.UTC).toEpochMilli());
-		long hours = TimeUnit.MILLISECONDS.toHours(time);
-		return hours;
+		return TimeUnit.MILLISECONDS.toHours(time);
 	}
 	
 	/**
