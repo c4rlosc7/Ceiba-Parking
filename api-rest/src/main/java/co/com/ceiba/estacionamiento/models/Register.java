@@ -1,7 +1,6 @@
 package co.com.ceiba.estacionamiento.models;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Register {
 	
@@ -15,7 +14,6 @@ public class Register {
 	
 	public Register() {		
 	}
-
 	
 	/* Constructor con parametros */
 	public Register(Long id, 

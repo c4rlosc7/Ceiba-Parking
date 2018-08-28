@@ -104,6 +104,17 @@ public class WatchmanTest {
 		assertEquals(resultadoEsperado, resultado);
 	}
 	
+	@Test
+	public void testGetHoursBetweenTwoDays() {
+		LocalDateTime myTime1 = LocalDateTime.now();
+		LocalDateTime myTime2 = LocalDateTime.now();
+		myTime2 = myTime2.plusDays(1);
+		long resultadoEsperado = 24;
+		long resultado = RulesParking.getHoursBetweenTwoDays(myTime1, myTime2);
+		System.out.println(resultado);
+		assertEquals(resultadoEsperado, resultado);
+	}
+	
 	/*@Test
 	public void testAvailableSpaceCarro(){
 		try {
