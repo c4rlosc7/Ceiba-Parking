@@ -5,7 +5,6 @@ import java.time.ZoneOffset;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import co.com.ceiba.estacionamiento.exceptions.ParkingException;
 import co.com.ceiba.estacionamiento.repositories.IRegisterRepository;

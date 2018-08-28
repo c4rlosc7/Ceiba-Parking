@@ -1,18 +1,9 @@
 package co.com.ceiba.estacionamiento.domain;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
-import co.com.ceiba.estacionamiento.converter.ConvertMTE;
-import co.com.ceiba.estacionamiento.entity.RegisterEntity;
 import co.com.ceiba.estacionamiento.exceptions.*;
 import co.com.ceiba.estacionamiento.models.Register;
 import co.com.ceiba.estacionamiento.repositories.IRegisterRepository;
-import co.com.ceiba.estacionamiento.services.RegisterServiceImplement;
 
 public class Watchman implements IWatchman {
 
@@ -44,12 +35,6 @@ public class Watchman implements IWatchman {
 	private IRegisterRepository vehicleRepository;
 
 	/**
-	 * Constructor sin parametros
-	 */
-	public Watchman() {
-	}
-
-	/**
 	 * Constructor con parametros
 	 * 
 	 * @param vehicleRepository
@@ -60,19 +45,22 @@ public class Watchman implements IWatchman {
 
 	/**
 	 * Método que valida el espacio disponible de carros o motos
-	 * 
 	 * @param tipo
 	 */
 	public void availableSpace(int type) {
-		int numVehicles = 0;
-		if (type == CARRO) {
-			numVehicles = vehicleRepository.findAllCars();
-			if (numVehicles >= 20)
-				throw new ParkingException(NO_HAY_ESPACIO_PARA_CARRO);
-		} else if (type == MOTO) {
-			numVehicles = vehicleRepository.findAllMotorcycles();
-			if (numVehicles >= 10)
-				throw new ParkingException(NO_HAY_ESPACIO_PARA_MOTO);
+		try {
+			int numVehicles = 0;
+			if (type == CARRO) {
+				numVehicles = vehicleRepository.findAllCars();
+				if (numVehicles >= 20)
+					throw new ParkingException(NO_HAY_ESPACIO_PARA_CARRO);
+			} else if (type == MOTO) {
+				numVehicles = vehicleRepository.findAllMotorcycles();
+				if (numVehicles >= 10)
+					throw new ParkingException(NO_HAY_ESPACIO_PARA_MOTO);
+			}			
+		} catch (Exception e) {
+			throw new ParkingException(e.getMessage());
 		}
 	}
 
@@ -87,17 +75,7 @@ public class Watchman implements IWatchman {
 			RulesParking.authorizedDay( RulesParking.todayIs() );
 		}
 		availableSpace(register.getTipo());
-	}
-	
-	/**
-	 * Método que evalua si el cilindraje ingresado en el vehiculo procesado es mayor al cilindraje base
-	 * @param cylinder
-	 * @return
-	 */
-	/*public boolean cylinderGreaterThan500(int cylinder) {
-		return cylinder > CILINDRAE_BASE;
-	}*/
-	
+	}	
 
 	@Override
 	public Register calculo(Register register) {

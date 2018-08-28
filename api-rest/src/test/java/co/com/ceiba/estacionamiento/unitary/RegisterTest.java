@@ -5,7 +5,6 @@ import static org.mockito.Mockito.mock;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
@@ -17,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import co.com.ceiba.estacionamiento.controllers.VehicleRegisterController;
 import co.com.ceiba.estacionamiento.converter.ConvertMTE;
+import co.com.ceiba.estacionamiento.entity.RegisterEntity;
 import co.com.ceiba.estacionamiento.models.Register;
 import co.com.ceiba.estacionamiento.repositories.IRegisterRepository;
 import co.com.ceiba.estacionamiento.testdatabuilder.RegisterDataBuilder;
@@ -28,9 +28,7 @@ public class RegisterTest {
 	@Autowired
 	VehicleRegisterController controller;
 
-	private IRegisterRepository vehicleRepository;
-	
-	private ConvertMTE converter;
+	private IRegisterRepository vehicleRepository;	
 	
 	private static final String PLACA = "XYZ-123";
 	private static final short CILINDRAJE = 600;
@@ -64,10 +62,9 @@ public class RegisterTest {
 	@Test
 	public void testGetList() {		
 		controller.getRegisterList();
-		int resultadoEsperado = 23;
-		System.out.println("GETTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
-		System.out.println(controller.getRegisterList().size());
+		int resultadoEsperado = 26;
 		int resultado = controller.getRegisterList().size();
+		System.out.println(resultado);
 		assertEquals(resultadoEsperado, resultado);
 	}
 	
@@ -83,8 +80,8 @@ public class RegisterTest {
 		vehicleDataBuilder.setCosto(COSTO);
 		
 		Register vehicle = vehicleDataBuilder.build();	
-		controller.saveRegister(converter.convertModelToEntity(vehicle));
-		assertNotNull(controller.saveRegister(converter.convertModelToEntity(vehicle)));
+		controller.saveRegister(ConvertMTE.convertModelToEntity(vehicle));
+		assertNotNull(controller.saveRegister(ConvertMTE.convertModelToEntity(vehicle)));
 	}
 	
 	@Test
@@ -101,14 +98,12 @@ public class RegisterTest {
 		registerDataBuilder.setCosto(COSTO);
 		
 		Register vehicleUpdate = registerDataBuilder.build();	
-		controller.saveRegister(converter.convertModelToEntity(vehicleUpdate));
+		controller.saveRegister(ConvertMTE.convertModelToEntity(vehicleUpdate));
 		
 		vehicleUpdate.setCosto(10000);
 		
-		ConvertMTE.convertEntityToModel(controller.updateRegister(converter.convertModelToEntity(vehicleUpdate), (long) 1));
+		ConvertMTE.convertEntityToModel(controller.updateRegister(ConvertMTE.convertModelToEntity(vehicleUpdate), (long) 1));
 		int resultadoEsperado = 10000;
-		System.out.println("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
-		System.out.println(vehicleUpdate.getCosto());
 		assertTrue(resultadoEsperado == vehicleUpdate.getCosto());
 	}
 	
@@ -117,15 +112,28 @@ public class RegisterTest {
 		long id = 1;
 		System.out.println(controller.calculateFee(id));
 		Register vehicle = ConvertMTE.convertEntityToModel(controller.calculateFee(id));
-		System.out.println("---------------------------------------------------------");
-		System.out.println(vehicle);
 		assertNotNull(vehicle.getCosto());
 	}
 	
-	/*@Test
-	public void testConvertEntityToModelList() {
+	@Test 
+	public void convertEntityToModelList() {
+		RegisterDataBuilder registerDataBuilder = new RegisterDataBuilder();
 		
-	}*/
+		registerDataBuilder.setPlaca(PLACA);
+		registerDataBuilder.setCilindraje(CILINDRAJE);
+		registerDataBuilder.setTipo(TIPO);
+		registerDataBuilder.setFechaEntrada(FECHA_ENTRADA);
+		registerDataBuilder.setFechaSalida(FECHA_SALIDA);
+		registerDataBuilder.setCosto(COSTO);
+		
+		Register vehicle = registerDataBuilder.build();
+		
+		List<Register> list = new ArrayList<>();
+		list.add(vehicle);
+		List<RegisterEntity> listEntity = new ArrayList<>();
+		listEntity = ConvertMTE.convertModelToEntityList(list);
+		assertNotNull( ConvertMTE.convertEntityToModelList(listEntity) );
+	}
 	
 	@Test 
 	public void testConvertModelToEntityList() {
@@ -142,11 +150,7 @@ public class RegisterTest {
 		
 		List<Register> list = new ArrayList<>();
 		list.add(vehicle);
-		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAA");
-		for(Register r: list) {
-			System.out.println( r.getCilindraje() );
-		}
-		assertNull( ConvertMTE.convertModelToEntityList(list) );
+		assertNotNull( ConvertMTE.convertModelToEntityList(list) );
 	}
 	
 }

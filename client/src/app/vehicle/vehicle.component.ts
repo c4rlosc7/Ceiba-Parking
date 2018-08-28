@@ -12,6 +12,7 @@ export class VehicleComponent implements OnInit {
 
   vehicleList: Vehicle[];
   display = 'none';
+  displayError = 'none';
 
   lengthVehicules: number;
   lengthCars: number;
@@ -99,7 +100,6 @@ export class VehicleComponent implements OnInit {
    */
   public createdVehicleRegister(): void {
     this.vehicleService.createVehicleRegister(this.vehicleModel).subscribe((response) => {
-      console.log(response);
       this.vehicleList.push(response);
       this.hideModal();
       this.getLengthVehicleList(this.vehicleList);
