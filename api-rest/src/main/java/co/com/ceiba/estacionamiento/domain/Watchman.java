@@ -85,7 +85,9 @@ public class Watchman implements IWatchman {
 				register.setCosto(hours * COSTO_X_HORA_CARRO);
 			} else if (register.getTipo() == MOTO) {
 				register.setCosto(hours * COSTO_X_HORA_MOTO);
-				if(RulesParking.cylinderGreaterThan500(register.getCilindraje())) register.setCosto( (register.getCosto() + VALOR_ADICIONAL_ALTO_CILIDRAJE));
+				if(RulesParking.cylinderGreaterThan500(register.getCilindraje())) {
+					register.setCosto( (register.getCosto() + VALOR_ADICIONAL_ALTO_CILIDRAJE));
+				}
 			}
 		} else {
 			long days = RulesParking.getDaysBetweenTwoDays(register.getFechaIngreso(), register.getFechaSalida());
