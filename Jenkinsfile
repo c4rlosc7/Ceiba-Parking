@@ -42,8 +42,8 @@ pipeline {
         echo "------------>Unit Tests<------------"      
         sh 'gradle --b ./api-rest/build.gradle cleanTest test'
         sh 'gradle --b ./api-rest/build.gradle test'
-        junit '**/build/test-results/*.xml' //aggregate test results - JUnit
-				jacoco classPattern:'**/build/classes/java', execPattern:'**/build/jacoco/jacocoTest.exec', sourcePattern:'**/src/main/java'
+        junit '**/api-rest/build/test-results/*.xml' //aggregate test results - JUnit
+				jacoco classPattern:'**/api-rest/build/classes/java', execPattern:'**/api-rest/build/jacoco/jacocoTest.exec', sourcePattern:'**/src/main/java'
       }    
     }
     
