@@ -1,5 +1,6 @@
 package co.com.ceiba.estacionamiento.models;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Register {
@@ -8,8 +9,8 @@ public class Register {
 	private String placa;
 	private int cilindraje;
 	private int tipo;
-	private Date fechaIngreso;
-	private Date fechaSalida;
+	private LocalDateTime fechaIngreso;
+	private LocalDateTime fechaSalida;
 	private long costo;
 	
 	public Register() {		
@@ -17,7 +18,14 @@ public class Register {
 
 	
 	/* Constructor con parametros */
-	public Register(Long id, String placa, int cilindraje, int tipo, Date fechaIngreso, Date fechaSalida, long costo) {
+	public Register(Long id, 
+					String placa, 
+					int cilindraje, 
+					int tipo, 
+					LocalDateTime fechaIngreso, 
+					LocalDateTime fechaSalida, 
+					long costo) {
+		
 		this.id = id;
 		this.placa = placa;
 		this.cilindraje = cilindraje;
@@ -52,16 +60,16 @@ public class Register {
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
-	public Date getFechaIngreso() {
+	public LocalDateTime getFechaIngreso() {
 		return fechaIngreso;
 	}
-	public void setFechaIngreso(Date fechaIngreso) {
+	public void setFechaIngreso(LocalDateTime fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
-	public Date getFechaSalida() {
+	public LocalDateTime getFechaSalida() {
 		return fechaSalida;
 	}
-	public void setFechaSalida(Date fechaSalida) {
+	public void setFechaSalida(LocalDateTime fechaSalida) {
 		this.fechaSalida = fechaSalida;
 	}
 	public long getCosto() {

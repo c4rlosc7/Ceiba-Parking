@@ -1,5 +1,7 @@
 package co.com.ceiba.estacionamiento.domain;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -74,19 +76,19 @@ public class RulesParking {
 	/**
 	 * Método que retorna la diferencia entre 2 fechas en días
 	 */
-	public static long getDaysBetweenTwoDays(Date d1, Date d2) {
-		long time = Math.abs(d1.getTime() - d2.getTime());
-		return TimeUnit.MILLISECONDS.toDays(time);
+	public static long getDaysBetweenTwoDays(LocalDateTime d1, LocalDateTime d2) {
+		long time = Math.abs(d1.getDayOfYear() - d2.getDayOfYear());
+		return time;
 	}
 	
 
 	/**
 	 * Método que retorn la diferencia entre 2 fechas en horas
 	 */
-	public static long getHoursBetweenTwoDays(Date d1, Date d2) {
-		long time = Math.abs(d1.getTime() - d2.getTime());
+	public static long getHoursBetweenTwoDays(LocalDateTime d1, LocalDateTime d2) {
+		long time = Math.abs(d1.toInstant(ZoneOffset.UTC).toEpochMilli() - d2.toInstant(ZoneOffset.UTC).toEpochMilli());
 		long hours = TimeUnit.MILLISECONDS.toHours(time);
-		return hours + 1;
+		return hours;
 	}
 	
 	/**

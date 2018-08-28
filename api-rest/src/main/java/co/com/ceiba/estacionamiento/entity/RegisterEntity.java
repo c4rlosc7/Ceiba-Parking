@@ -23,7 +23,13 @@ public class RegisterEntity implements Serializable {
 		
 	}
 	
-	public RegisterEntity(long id, String placa, int cilindraje, int tipo, Date fechaIngreso, Date fechaSalida, long costo) {
+	public RegisterEntity(long id, 
+						  String placa, 
+						  int cilindraje, 
+						  int tipo, 
+						  LocalDateTime fechaIngreso, 
+						  LocalDateTime fechaSalida, 
+						  long costo) {
 		this.id = id;
 		this.placa = placa;
 		this.cilindraje = cilindraje;
@@ -43,20 +49,17 @@ public class RegisterEntity implements Serializable {
 	private int tipo;
 
 	@Column(name = "fecha_ingreso")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date fechaIngreso;
+	private LocalDateTime fechaIngreso;
 
 	@Column(name = "fecha_salida", nullable = true)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date fechaSalida;
+	private LocalDateTime fechaSalida;
 
 	//@Column(nullable = true)
 	private long costo;
 
 	@PrePersist
 	private void onCreate() {
-		Instant instant = LocalDateTime.now().toInstant(ZoneOffset.UTC);
-		fechaIngreso = Date.from(instant);
+		fechaIngreso = LocalDateTime.now();
 	}
 
 	/* Getters and Setters */
@@ -92,19 +95,19 @@ public class RegisterEntity implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public Date getFechaIngreso() {
+	public LocalDateTime getFechaIngreso() {
 		return fechaIngreso;
 	}
 
-	public void setFechaIngreso(Date fechaIngreso) {
+	public void setFechaIngreso(LocalDateTime fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
 
-	public Date getFechaSalida() {
+	public LocalDateTime getFechaSalida() {
 		return fechaSalida;
 	}
 
-	public void setFechaSalida(Date fechaSalida) {
+	public void setFechaSalida(LocalDateTime fechaSalida) {
 		this.fechaSalida = fechaSalida;
 	}
 

@@ -94,8 +94,7 @@ public class RegisterServiceImplement implements IRegisterService {
 	public RegisterEntity calculateFee(Long id) {
 		try {
 			RegisterEntity registerUpdate = findById(id);
-			Instant instant = LocalDateTime.now().toInstant(ZoneOffset.UTC);
-			registerUpdate.setFechaSalida(Date.from(instant));
+			registerUpdate.setFechaSalida(LocalDateTime.now());
 			Register registerModel = ConvertMTE.convertEntityToModel(registerUpdate);
 			v.calculo(registerModel);
 			return registerRepository.save(ConvertMTE.convertModelToEntity(registerModel));			

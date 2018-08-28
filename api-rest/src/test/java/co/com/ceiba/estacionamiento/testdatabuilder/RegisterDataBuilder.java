@@ -1,5 +1,6 @@
 package co.com.ceiba.estacionamiento.testdatabuilder;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import co.com.ceiba.estacionamiento.models.Register;
@@ -10,16 +11,16 @@ public class RegisterDataBuilder {
 	private static final String PLACA = "XYZ-123";
 	private static final short CILINDRAJE = 700;
 	private static final int TIPO = 2;
-	private static final Date FECHA_ENTRADA = new Date();
-	private static final Date FECHA_SALIDA = new Date();
+	private static final LocalDateTime FECHA_ENTRADA = LocalDateTime.now();
+	private static final LocalDateTime FECHA_SALIDA = LocalDateTime.now();
 	private static final long COSTO = 8000;
 	
 	private Long id;
 	private String placa;
 	private short cilindraje;
 	private int tipo;
-	private Date fechaEntrada;
-	private Date fechaSalida;
+	private LocalDateTime fechaEntrada;
+	private LocalDateTime fechaSalida;
 	private long costo;
 	
 	public RegisterDataBuilder() {
@@ -48,11 +49,11 @@ public class RegisterDataBuilder {
 		this.tipo = tipo;
 	}
 
-	public void setFechaEntrada(Date fechaEntrada) {
+	public void setFechaEntrada(LocalDateTime fechaEntrada) {
 		this.fechaEntrada = fechaEntrada;
 	}
 
-	public void setFechaSalida(Date fechaSalida) {
+	public void setFechaSalida(LocalDateTime fechaSalida) {
 		this.fechaSalida = fechaSalida;
 	}
 
