@@ -12,7 +12,7 @@ public class ConvertMTE {
 	/**
 	 * Constructor
 	 */
-	public ConvertMTE() {
+	public ConvertMTE() { // Constructor vacio
 	}
 
 	/**
