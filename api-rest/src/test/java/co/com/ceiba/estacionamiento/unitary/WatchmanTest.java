@@ -104,22 +104,22 @@ public class WatchmanTest {
 		assertEquals(resultadoEsperado, resultado);
 	}
 	
-	@Test
+	/*@Test
 	public void testAvailableSpaceCarro(){
 		try {
 			watch.availableSpace(CARRO);
 		} catch (Exception e) {
 			assertEquals("No hay espacio para mas carros en el parqueadero", e.getMessage());
 		}
-	}
+	}*/
 	
-	@Test
+	/*@Test
 	public void testAvailableSpaceMoto() {
 		try {
 			watch.availableSpace(MOTO);
 		} catch (Exception e) {
 			assertEquals("No hay mas espacio para mas motos en el parqueadero", e.getMessage());
 		}
-	}
+	}*/
 	
 }
