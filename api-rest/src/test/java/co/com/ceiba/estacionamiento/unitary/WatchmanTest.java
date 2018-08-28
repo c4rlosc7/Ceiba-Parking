@@ -58,22 +58,40 @@ public class WatchmanTest {
 		vehicleDataBuilder.setCosto(COSTO);
 		
 		Register vehicle = vehicleDataBuilder.build();	
-		assertEquals(PLACA, vehicle.getPlaca());		
+		assertEquals(PLACA, vehicle.getPlaca());
+		assertEquals(CILINDRAJE, vehicle.getCilindraje());
+		assertEquals(TIPO, vehicle.getTipo());
+		assertEquals(COSTO, vehicle.getCosto());
 	}
 	
 	@Test
 	public void testCylinderGreaterThan500() {
 		boolean respuestaEsperada = true;
-		boolean respuesta = watchman.cylinderGreaterThan500(600);
-		System.out.println(watchman.cylinderGreaterThan500(600));
+		boolean respuesta = RulesParking.cylinderGreaterThan500(600);
+		System.out.println(RulesParking.cylinderGreaterThan500(600));
 		assertTrue(respuesta == respuestaEsperada);
 		
 	}
 	
-	/*@Test(expected = ParkingException.class)
-	public void testAuthorized() throws ParkingException {
+	@Test
+	public void testauthorizedPlate() {
 		String placa = "AAA";
-		rules.authorizedPlate(placa);
-	}*/
+		boolean resultado = RulesParking.authorizedPlate(placa);
+		boolean resultadoEsperado = true;
+		assertTrue( resultado == resultadoEsperado);
+	}
+	
+	@Test(expected = ParkingException.class)
+	public void testauthorizedDay() throws ParkingException {
+		int dia = 3;
+		RulesParking.authorizedDay(dia);
+	}
+	
+	@Test
+	public void testTodayIs() {
+		int resultadoEsperado = 2;
+		int resultado = RulesParking.todayIs();
+		assertTrue(resultado == resultadoEsperado);
+	}
 	
 }

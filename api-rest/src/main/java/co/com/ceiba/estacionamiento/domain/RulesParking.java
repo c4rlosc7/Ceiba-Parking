@@ -2,6 +2,8 @@ package co.com.ceiba.estacionamiento.domain;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import co.com.ceiba.estacionamiento.exceptions.ParkingException;
 import co.com.ceiba.estacionamiento.repositories.IRegisterRepository;
@@ -39,32 +41,61 @@ public class RulesParking {
 	 * Método que valida si la placa inicia por la letra A
 	 * @param placa
 	 */
-	public static void authorizedPlate(String placa) {
+	public static boolean authorizedPlate(String placa) {
 		char letter = placa.charAt(0);
-		if (letter == CARACTER_A) authorizedDay();
+		if (letter == CARACTER_A) {
+			return true;
+		}
+		return false;
 	}
 	
 	/**
 	 * Método que valida el día que va a ingresar el vehiculo, si esta autorizado a
 	 * entrar
 	 */
-	public static void authorizedDay() {
-		int dayOfWeek = dayOfWeek();
+	public static void authorizedDay(int dayOfWeek) {
 		if (dayOfWeek != DIA_DOMINGO && dayOfWeek != DIA_LUNES) {
 			throw new ParkingException(INGRESO_NO_AUTORIZADO);
 		}
 	}
 	
 	/**
-	 * Método que retorna el numero del día actual
+	 * Método que retorna un entero dependiendo del día de la semana E.G domingo = 1
 	 * @return
 	 */
-	public static int dayOfWeek() {
+	public static int todayIs() {
 		Date today = new Date();
 		Calendar c = Calendar.getInstance();
 		c.setTime(today);
-		int day = c.get(Calendar.DAY_OF_WEEK);		
-		return day;
+		int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+		return dayOfWeek;
+	}
+	
+	/**
+	 * Método que retorna la diferencia entre 2 fechas en días
+	 */
+	public static long getDaysBetweenTwoDays(Date d1, Date d2) {
+		long time = Math.abs(d1.getTime() - d2.getTime());
+		return TimeUnit.MILLISECONDS.toDays(time);
+	}
+	
+
+	/**
+	 * Método que retorn la diferencia entre 2 fechas en horas
+	 */
+	public static long getHoursBetweenTwoDays(Date d1, Date d2) {
+		long time = Math.abs(d1.getTime() - d2.getTime());
+		long hours = TimeUnit.MILLISECONDS.toHours(time);
+		return hours + 1;
+	}
+	
+	/**
+	 * Método que evalua si el cilindraje ingresado en el vehiculo procesado es mayor al cilindraje base
+	 * @param cylinder
+	 * @return
+	 */
+	public static boolean cylinderGreaterThan500(int cylinder) {
+		return cylinder > CILINDRAE_BASE;
 	}
 	
 }

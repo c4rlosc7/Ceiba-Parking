@@ -35,7 +35,6 @@ public class Vehicle {
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
-	
-	
+
 
 }

@@ -3,7 +3,10 @@ package co.com.ceiba.estacionamiento.unitary;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -116,6 +119,33 @@ public class RegisterTest {
 		System.out.println("---------------------------------------------------------");
 		System.out.println(vehicle);
 		assertNotNull(vehicle.getCosto());
+	}
+	
+	/*@Test
+	public void testConvertEntityToModelList() {
+		
+	}*/
+	
+	@Test 
+	public void testConvertModelToEntityList() {
+		RegisterDataBuilder registerDataBuilder = new RegisterDataBuilder();
+		
+		registerDataBuilder.setPlaca(PLACA);
+		registerDataBuilder.setCilindraje(CILINDRAJE);
+		registerDataBuilder.setTipo(TIPO);
+		registerDataBuilder.setFechaEntrada(FECHA_ENTRADA);
+		registerDataBuilder.setFechaSalida(FECHA_SALIDA);
+		registerDataBuilder.setCosto(COSTO);
+		
+		Register vehicle = registerDataBuilder.build();
+		
+		List<Register> list = new ArrayList<>();
+		list.add(vehicle);
+		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAA");
+		for(Register r: list) {
+			System.out.println( r.getCilindraje() );
+		}
+		assertNull( ConvertMTE.convertModelToEntityList(list) );
 	}
 	
 }

@@ -41,8 +41,6 @@ export class VehicleComponent implements OnInit {
   * Abre el modal de agregar
   */
   public openModalCreate(): void {
-    //debugger
-    //this.vehicleModel = null;
     this.display = 'block';
   }
 
@@ -57,13 +55,12 @@ export class VehicleComponent implements OnInit {
    * Oculta el modal de agregar
    */
   public hideModal(): void {
-    //this.vehicleModel = null;
     this.display = 'none';
   }
 
   /**
    * Calcula el total de vehiculos registrados en el parqueadero
-   * @param vehicleList 
+   * @param vehicleList;
    */
   public getLengthVehicleList(vehicleList: Vehicle[]): void {
     this.lengthVehicules = vehicleList.length;
@@ -71,27 +68,27 @@ export class VehicleComponent implements OnInit {
 
   /**
    * Calcular el total de carros ingresados en el parqueadero
-   * @param vehicleList 
+   * @param vehicleList;
    */
   public getLengthCars(vehicleList: Vehicle[]): void {
     let count = 0;
     for (let index = 0; index < vehicleList.length; index++) {
-      if (vehicleList[index].tipo == 1) {
-        count++
+      if (vehicleList[index].tipo === 1) {
+        count++;
       }
     }
-    this.lengthCars = count
+    this.lengthCars = count;
   }
 
   /**
    * Obtiene el total de motos ingresadas en el parqueadero
-   * @param vehicleList 
+   * @param vehicleList;
    */
   public getLengthMotos(vehicleList: Vehicle[]): void {
     let count = 0;
     for (let index = 0; index < vehicleList.length; index++) {
-      if (vehicleList[index].tipo == 2) {
-        count++
+      if (vehicleList[index].tipo === 2) {
+        count++;
       }
     }
     this.lengthMotos = count;
@@ -102,11 +99,14 @@ export class VehicleComponent implements OnInit {
    */
   public createdVehicleRegister(): void {
     this.vehicleService.createVehicleRegister(this.vehicleModel).subscribe((response) => {
-      console.log(response)
-      this.vehicleList.push(response)
+      console.log(response);
+      this.vehicleList.push(response);
       this.hideModal();
+      this.getLengthVehicleList(this.vehicleList);
+      this.getLengthCars(this.vehicleList);
+      this.getLengthMotos(this.vehicleList);
     }, error => {
-      alert(error.error.message)
+      alert(error.error.message);
     });
   }
 
@@ -135,7 +135,7 @@ export class VehicleComponent implements OnInit {
       this.vehicleModel = response;
       this.hideModal();
     }, error => {
-      alert(error.error.message)
+      alert(error.error.message);
     });
   }
 
@@ -146,7 +146,7 @@ export class VehicleComponent implements OnInit {
     this.vehicleService.calculateFee(v.id).subscribe((response) => {
       this.vehicleList[index] = response;
     }, error => {
-      alert(error.error.message)
+      alert(error.error.message);
     });
   }
 

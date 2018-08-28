@@ -83,28 +83,10 @@ public class Watchman implements IWatchman {
 	 */
 	@Override
 	public void validateInRegister(Register register) {
-		RulesParking.authorizedPlate(register.getPlaca());
+		if( RulesParking.authorizedPlate(register.getPlaca()) ) {
+			RulesParking.authorizedDay( RulesParking.todayIs() );
+		}
 		availableSpace(register.getTipo());
-	}
-
-	/**
-	 * Método que retorna la diferencia entre 2 fechas en días
-	 */
-	@Override
-	public long getDaysBetweenTwoDays(Date d1, Date d2) {
-		long time = Math.abs(d1.getTime() - d2.getTime());
-		return TimeUnit.MILLISECONDS.toDays(time);
-	}
-	
-
-	/**
-	 * Método que retorn la diferencia entre 2 fechas en horas
-	 */
-	@Override
-	public long getHoursBetweenTwoDays(Date d1, Date d2) {
-		long time = Math.abs(d1.getTime() - d2.getTime());
-		long hours = TimeUnit.MILLISECONDS.toHours(time);
-		return hours + 1;
 	}
 	
 	/**
@@ -112,23 +94,23 @@ public class Watchman implements IWatchman {
 	 * @param cylinder
 	 * @return
 	 */
-	public boolean cylinderGreaterThan500(int cylinder) {
+	/*public boolean cylinderGreaterThan500(int cylinder) {
 		return cylinder > CILINDRAE_BASE;
-	}
+	}*/
 	
 
 	@Override
 	public Register calculo(Register register) {
-		long hours = getHoursBetweenTwoDays(register.getFechaIngreso(), register.getFechaSalida());
+		long hours = RulesParking.getHoursBetweenTwoDays(register.getFechaIngreso(), register.getFechaSalida());
 		if (hours < HORAS_MAX) {
 			if (register.getTipo() == CARRO) {
 				register.setCosto(hours * COSTO_X_HORA_CARRO);
 			} else if (register.getTipo() == MOTO) {
 				register.setCosto(hours * COSTO_X_HORA_MOTO);
-				if(cylinderGreaterThan500(register.getCilindraje())) register.setCosto( (register.getCilindraje() + VALOR_ADICIONAL_ALTO_CILIDRAJE));
+				if(RulesParking.cylinderGreaterThan500(register.getCilindraje())) register.setCosto( (register.getCosto() + VALOR_ADICIONAL_ALTO_CILIDRAJE));
 			}
 		} else {
-			long days = getDaysBetweenTwoDays(register.getFechaIngreso(), register.getFechaSalida());
+			long days = RulesParking.getDaysBetweenTwoDays(register.getFechaIngreso(), register.getFechaSalida());
 			if (register.getTipo() == CARRO) {
 				register.setCosto(days * COSTO_X_DIA_CARRO);
 			} else if (register.getTipo() == MOTO) {
