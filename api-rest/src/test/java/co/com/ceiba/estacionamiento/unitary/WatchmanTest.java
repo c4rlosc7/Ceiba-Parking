@@ -115,6 +115,54 @@ public class WatchmanTest {
 		assertEquals(resultadoEsperado, resultado);
 	}
 	
+	@Test
+	public void testCalculoMotoHoras() {
+		RegisterDataBuilder registerDataBuilder = new RegisterDataBuilder();
+		short CIL = 800;
+		LocalDateTime FECHA_IN = LocalDateTime.of(2018, 8, 29, 7, 0);
+		LocalDateTime FECHA_OUT = LocalDateTime.of(2018, 8, 29, 10, 0);
+		registerDataBuilder.setPlaca("ABC-01");
+		registerDataBuilder.setCilindraje(CIL);				
+		registerDataBuilder.setTipo(2);
+		registerDataBuilder.setFechaEntrada(FECHA_IN);
+		registerDataBuilder.setFechaSalida(FECHA_OUT);
+		Register reg = registerDataBuilder.build();
+		System.out.println("*******************************");
+		System.out.println(reg.getPlaca());
+		System.out.println(reg.getCilindraje());
+		System.out.println(reg.getTipo());
+		System.out.println(reg.getFechaIngreso());
+		System.out.println(reg.getFechaSalida());
+		watch.calculo(reg);
+		System.out.println(reg.getCosto());
+		int resultadoEsperado = 3500;
+		assertEquals(resultadoEsperado, reg.getCosto());
+	}
+	
+	@Test
+	public void testCalculoMotoDias() {
+		RegisterDataBuilder registerDataBuilder = new RegisterDataBuilder();
+		short CIL = 800;
+		LocalDateTime FECHA_IN = LocalDateTime.of(2018, 8, 29, 10, 0);
+		LocalDateTime FECHA_OUT = LocalDateTime.of(2018, 8, 30, 10, 0);
+		registerDataBuilder.setPlaca("ABC-01");
+		registerDataBuilder.setCilindraje(CIL);				
+		registerDataBuilder.setTipo(2);
+		registerDataBuilder.setFechaEntrada(FECHA_IN);
+		registerDataBuilder.setFechaSalida(FECHA_OUT);
+		Register reg = registerDataBuilder.build();
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println(reg.getPlaca());
+		System.out.println(reg.getCilindraje());
+		System.out.println(reg.getTipo());
+		System.out.println(reg.getFechaIngreso());
+		System.out.println(reg.getFechaSalida());
+		watch.calculo(reg);
+		System.out.println(reg.getCosto());
+		int resultadoEsperado = 4000;
+		assertEquals(resultadoEsperado, reg.getCosto());
+	}
+	
 	/*@Test
 	public void testAvailableSpaceCarro(){
 		try {
