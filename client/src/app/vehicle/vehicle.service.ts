@@ -30,6 +30,10 @@ export class VehicleService {
     return this.http.put<Vehicle>(`${this.urlEndPoint + "/update" }/${id}`, vehicle, { headers: this.httpHeaders });
   }
 
+  deleteRegister(id: number): Observable<Vehicle>{
+    return this.http.delete<Vehicle>(`${this.urlEndPoint + "/delete" }/${id}`, { headers: this.httpHeaders });
+  }
+
   calculateFee(id: number): Observable<Vehicle>{
     return this.http.put<Vehicle>(`${this.urlEndPoint + "/calculate" }/${id}`, { headers: this.httpHeaders });
   }

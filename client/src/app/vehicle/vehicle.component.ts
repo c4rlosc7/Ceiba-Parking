@@ -110,12 +110,6 @@ export class VehicleComponent implements OnInit {
     });
   }
 
-
-  public initUpdate(v: Vehicle): void {
-    this.vehicleModel = v;
-    this.openModalUpdate();
-  }
-
   /**
    * Gestiona si se requiere guardar o actualizar
    */
@@ -134,6 +128,18 @@ export class VehicleComponent implements OnInit {
     this.vehicleService.updateVehicleRegister(this.vehicleModel, this.vehicleModel.id).subscribe((response) => {
       this.vehicleModel = response;
       this.hideModal();
+    }, error => {
+      alert(error.error.message);
+    });
+  }
+
+  /**
+ * Actualiza el registro del ingreso al parqueadero
+ */
+  public deleteRegister(id: number, index: number): void {
+    console.log(id)
+    this.vehicleService.deleteRegister(id).subscribe((response) => {
+      this.vehicleList.splice(index, 1);
     }, error => {
       alert(error.error.message);
     });

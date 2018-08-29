@@ -153,5 +153,12 @@ public class RegisterTest {
 		assertNotNull( ConvertMTE.convertModelToEntityList(list) );
 	}
 	
+	@Test
+	public void testDeleteRegister() {
+		long id = 5;
+		controller.deleteRegister(id);
+		assertNull(null);
+	}
+	
 }
 

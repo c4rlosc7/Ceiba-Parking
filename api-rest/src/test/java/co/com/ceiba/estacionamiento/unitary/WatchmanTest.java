@@ -89,7 +89,7 @@ public class WatchmanTest {
 	
 	@Test
 	public void testTodayIs() {
-		int resultadoEsperado = 3;
+		int resultadoEsperado = 4;
 		int resultado = RulesParking.todayIs();
 		assertTrue(resultado == resultadoEsperado);
 	}

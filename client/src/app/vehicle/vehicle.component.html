@@ -1,66 +1,69 @@
 <div class="container">
   <div class="row">
-    <div class="col col-lg-6">
+    <div class="col col-sm-6">
       <h1>Total vehiculos: {{ lengthVehicules }}</h1>
     </div>
-    <div class="col col-lg-6 text-right" style="padding-top: 12px;">
+    <div class="col col-sm-6 text-right" style="padding-top: 12px;">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#idVehicleModal" (click)="openModalCreate()">
         Nuevo ingreso
       </button>
     </div>
   </div>
   <div class="row">
-    <div class="col col-lg-3 cars-length">Total carros: {{ lengthCars }}</div>
-    <div class="col col-lg-3 moto-length">Total motos: {{ lengthMotos }}</div>
+    <div class="col col-sm-3 cars-length">Total carros: {{ lengthCars }}</div>
+    <div class="col col-sm-3 moto-length">Total motos: {{ lengthMotos }}</div>
   </div>
   <!--<div>-->
   <div class="row my-4 vehicle-style">
-    <div class="col col-lg-1 bold">
+    <div class="col col-sm-1 bold">
       #PLACA
     </div>
-    <div class="col col-lg-2 bold">
+    <div class="col col-sm-2 bold">
       CILINDRAJE(CC)
     </div>
-    <div class="col col-lg-2 bold">
+    <div class="col col-sm-2 bold">
       FECHA INGRESO
     </div>
-    <div class="col col-lg-2 bold">
+    <div class="col col-sm-2 bold">
       FECHA SALIDA
     </div>
-    <div class="col col-lg-2 bold">
+    <div class="col col-sm-2 bold">
       TIPO
     </div>
-    <div class="col col-lg-3 bold">
+    <div class="col col-sm-3 bold">
       COSTO PARQUEADERO
     </div>
   </div>
+  <div class="row" *ngIf="vehicleList.length == 0">
+    <p class="text-center">No hay elementos para mostrar.</p>
+  </div>
   <div class="row" *ngFor="let vehicle of vehicleList; let idx = index" style="border: solid 1px gray;padding: 20px 0; margin-top: 20px;">
-    <div class="col col-lg-1">
+    <div class="col col-sm-1">
       <label for="" style="font-size: 12px;">{{ vehicle.placa }}</label>
     </div>
-    <div class="col col-lg-2">
+    <div class="col col-sm-2">
       <label for="" style="font-size: 12px;">{{ vehicle.cilindraje }}</label>
     </div>
-    <div class="col col-lg-2">
+    <div class="col col-sm-2">
       <label for="" style="font-size: 12px;">{{ vehicle.fechaIngreso | date : 'M/d/yy h:mm a' }}</label>
     </div>
-    <div class="col col-lg-2">
+    <div class="col col-sm-2">
       <label for="" style="font-size: 12px;">{{ vehicle.fechaSalida | date : 'M/d/yy h:mm a' }}</label>
     </div>
-    <div class="col col-lg-1" *ngIf="vehicle.tipo==1;">
+    <div class="col col-sm-1" *ngIf="vehicle.tipo==1;">
       <i class="fa fa-car" aria-hidden="true"></i>
     </div>
-    <div class="col col-lg-1" *ngIf="vehicle.tipo==2;">
+    <div class="col col-sm-1" *ngIf="vehicle.tipo==2;">
       <i class="fa fa-motorcycle" aria-hidden="true"></i>
     </div>
-    <div class="col col-lg-1">
+    <div class="col col-sm-1">
       <button type="button" class="btn btn-danger" (click)="calculateFee(vehicle, idx)">Pago</button>
     </div>
-    <div class="col col-lg-2">
+    <div class="col col-sm-2">
       <label style="font-size: 12px;">Costo parqueadero: $ {{ vehicle.costo }}</label>
     </div>
-    <div class="col col-lg-1">
-      <i class="fa fa-pencil" aria-hidden="true" (click)="initUpdate(vehicle, idx)" style="cursor: pointer;"></i>
+    <div class="col col-sm-1">
+      <i class="fa fa-trash-o" aria-hidden="true" *ngIf="vehicle.costo != 0" (click)="deleteRegister(vehicle.id, idx)" style="cursor: pointer; color: red;"></i>
     </div>
   </div>
   <!--</div>-->
