@@ -97,13 +97,21 @@ public class RegisterTest {
 		registerDataBuilder.setFechaSalida(FECHA_SALIDA);
 		registerDataBuilder.setCosto(COSTO);
 		
-		Register vehicleUpdate = registerDataBuilder.build();	
+		Register vehicleUpdate = registerDataBuilder.build();
+		
 		controller.saveRegister(ConvertMTE.convertModelToEntity(vehicleUpdate));
 		
 		vehicleUpdate.setCosto(10000);
 		
+		
+		
+		
 		ConvertMTE.convertEntityToModel(controller.updateRegister(ConvertMTE.convertModelToEntity(vehicleUpdate), (long) 1));
+		
+		
+		
 		int resultadoEsperado = 10000;
+		
 		assertTrue(resultadoEsperado == vehicleUpdate.getCosto());
 	}
 	
