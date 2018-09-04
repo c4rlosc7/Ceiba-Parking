@@ -21,7 +21,7 @@ public class ConvertMTE {
 	 * @param vehicleEntity
 	 * @return
 	 */
-	public static Register convertEntityToModel(RegisterEntity registerEntity) {
+	/*public static Register convertEntityToModel(RegisterEntity registerEntity) {
 		try {
 			Register register = null;
 			if (registerEntity != null) {
@@ -34,7 +34,7 @@ public class ConvertMTE {
 		} catch (Exception e) {
 			throw new ParkingException(e.getMessage());
 		}
-	}
+	}*/
 
 	/**
 	 * Método que convierte una lista de entidades a una lista de modelo

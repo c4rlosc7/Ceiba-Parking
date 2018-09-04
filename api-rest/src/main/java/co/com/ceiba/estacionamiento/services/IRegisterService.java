@@ -4,6 +4,7 @@ import java.util.List;
 
 import co.com.ceiba.estacionamiento.entity.*;
 import co.com.ceiba.estacionamiento.models.Register;
+import co.com.ceiba.estacionamiento.models.Vehicle;
 
 /**
  * Clase con los métodos para realizar la gestion del registro de vehiculos al parqueadero
@@ -14,7 +15,7 @@ public interface IRegisterService {
 
 	public List<Register> getListRegisterSrv();
 	
-	public RegisterEntity saveRegister(RegisterEntity vehicle);
+	public Register entryRegisterSrv(Vehicle veh);
 	
 	public void deleteRegister(Long id);
 	

@@ -1,6 +1,8 @@
 package co.com.ceiba.estacionamiento.domain;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import co.com.ceiba.estacionamiento.converter.ConvertMTE;
 import co.com.ceiba.estacionamiento.entity.RegisterEntity;
 import co.com.ceiba.estacionamiento.exceptions.*;
+import co.com.ceiba.estacionamiento.models.ReglasVehiculo;
 import co.com.ceiba.estacionamiento.models.Register;
+import co.com.ceiba.estacionamiento.models.Vehicle;
 import co.com.ceiba.estacionamiento.repositories.IRegisterRepository;
 
 public class Watchman implements IWatchman {
@@ -63,16 +67,14 @@ public class Watchman implements IWatchman {
 	 */
 	public void availableSpace(int type) {
 		try {
-			int numVehicles = 0;
-			if (type == CARRO) {
-				numVehicles = vehicleRepository.findAllCars();
-				if (numVehicles >= 20)
+			ReglasVehiculo c = new ReglasVehiculo(vehicleRepository);
+			/*if (type == CARRO) {
+				if (c.espacioDisCarro())
 					throw new ParkingException(NO_HAY_ESPACIO_PARA_CARRO);
 			} else if (type == MOTO) {
-				numVehicles = vehicleRepository.findAllMotorcycles();
-				if (numVehicles >= 10)
+				if (c.espacioDisMoto())
 					throw new ParkingException(NO_HAY_ESPACIO_PARA_MOTO);
-			}			
+			}*/	
 		} catch (Exception e) {
 			throw new ParkingException(e.getMessage());
 		}
@@ -84,11 +86,18 @@ public class Watchman implements IWatchman {
 	 * @param register
 	 */
 	@Override
-	public void validateInRegister(Register register) {
-		if( RulesParking.authorizedPlate(register.getPlaca()) ) {
+	public void validateInRegister(Vehicle veh) {
+		// throw new ParkingException(INGRESO_NO_AUTORIZADO);
+		/*if( RulesParking.authorizedPlate(register.getPlaca()) ) {
 			RulesParking.authorizedDay( RulesParking.todayIs() );
 		}
-		availableSpace(register.getTipo());
+		availableSpace(register.getTipo());*/
+		/*if(veh.authorizedPlate()) {
+			veh.authorizedDay(2);
+		}else {
+			
+		}*/
+		veh.espacioDisponible(veh.getTipo());
 	}	
 
 	@Override

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.com.ceiba.estacionamiento.entity.RegisterEntity;
 import co.com.ceiba.estacionamiento.models.Register;
+import co.com.ceiba.estacionamiento.models.Vehicle;
 import co.com.ceiba.estacionamiento.services.IRegisterService;
 
 @CrossOrigin(origins = {"*"})
@@ -32,7 +33,7 @@ public class VehicleRegisterController {
 	 */
 	@GetMapping("/vehicles")
 	@ResponseStatus(HttpStatus.OK)
-	public List<Register> getRegisterList(){
+	public List<Register> getListRegisterCtr(){
 		return vehicleService.getListRegisterSrv();
 	}
 	
@@ -43,8 +44,8 @@ public class VehicleRegisterController {
 	 */
 	@PostMapping("/add")
 	@ResponseStatus(HttpStatus.CREATED)
-	public RegisterEntity saveRegister(@RequestBody RegisterEntity vehicle) {
-		return vehicleService.saveRegister(vehicle);
+	public Register entryRegister(@RequestBody Vehicle veh) {
+		return vehicleService.entryRegisterSrv(veh);
 	}
 	
 	/**

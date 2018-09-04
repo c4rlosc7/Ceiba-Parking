@@ -14,11 +14,8 @@ public class RulesParking {
 	@Autowired
 	private IRegisterRepository vehicleRepository;
 	
-	public static final String INGRESO_NO_AUTORIZADO = "No esta autorizado para ingresar";
 
 	public static final char CARACTER_A = 'A';
-	public static final int DIA_DOMINGO = 1;
-	public static final int DIA_LUNES = 2;
 	public static final int CILINDRAE_BASE = 500;
 	
 	/**
@@ -34,11 +31,11 @@ public class RulesParking {
 	 * Método que valida el día que va a ingresar el vehiculo, si esta autorizado a
 	 * entrar
 	 */
-	public static void authorizedDay(int dayOfWeek) {
+	/*public static void authorizedDay(int dayOfWeek) {
 		if (dayOfWeek != DIA_DOMINGO && dayOfWeek != DIA_LUNES) {
 			throw new ParkingException(INGRESO_NO_AUTORIZADO);
 		}
-	}
+	}*/
 	
 	/**
 	 * Método que retorna un entero dependiendo del día de la semana E.G domingo = 1

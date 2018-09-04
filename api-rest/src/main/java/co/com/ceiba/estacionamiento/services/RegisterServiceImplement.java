@@ -13,6 +13,7 @@ import co.com.ceiba.estacionamiento.domain.Watchman;
 import co.com.ceiba.estacionamiento.entity.RegisterEntity;
 import co.com.ceiba.estacionamiento.exceptions.ParkingException;
 import co.com.ceiba.estacionamiento.models.Register;
+import co.com.ceiba.estacionamiento.models.Vehicle;
 import co.com.ceiba.estacionamiento.repositories.IRegisterRepository;
 
 @Service
@@ -40,8 +41,7 @@ public class RegisterServiceImplement implements IRegisterService {
 	}
 
 	@Override
-	@Transactional
-	public RegisterEntity saveRegister(RegisterEntity register) {
+	public Register entryRegisterSrv(Vehicle veh) {
 		try {
 			Register registerModel = ConvertMTE.convertEntityToModel(register);
 			v.validateInRegister(registerModel);
