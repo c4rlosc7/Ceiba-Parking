@@ -1,6 +1,7 @@
 package co.com.ceiba.estacionamiento.services;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,11 @@ public class RegisterServiceImplement implements IRegisterService {
 	}	
 
 	@Override
-	@Transactional(readOnly = true)
-	public List<RegisterEntity> getListRegister() {
+	public List<Register> getListRegisterSrv() {
 		try {
-			return (List<RegisterEntity>) registerRepository.findAll();	
+			List<Register> list = new ArrayList<>();
+			list = v.getRegisterList();
+			return list;	
 		} catch (Exception e) {
 			throw new ParkingException(e.getMessage());
 		}		
@@ -97,6 +99,7 @@ public class RegisterServiceImplement implements IRegisterService {
 			throw new ParkingException(e.getMessage());
 		}
 	}
+
 
 
 }

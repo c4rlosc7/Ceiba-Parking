@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.ceiba.estacionamiento.entity.RegisterEntity;
+import co.com.ceiba.estacionamiento.models.Register;
 import co.com.ceiba.estacionamiento.services.IRegisterService;
 
 @CrossOrigin(origins = {"*"})
@@ -31,8 +32,8 @@ public class VehicleRegisterController {
 	 */
 	@GetMapping("/vehicles")
 	@ResponseStatus(HttpStatus.OK)
-	public List<RegisterEntity> getRegisterList(){
-		return vehicleService.getListRegister();
+	public List<Register> getRegisterList(){
+		return vehicleService.getListRegisterSrv();
 	}
 	
 	/**

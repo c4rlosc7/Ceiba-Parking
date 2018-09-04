@@ -1,6 +1,12 @@
 package co.com.ceiba.estacionamiento.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
+import co.com.ceiba.estacionamiento.converter.ConvertMTE;
+import co.com.ceiba.estacionamiento.entity.RegisterEntity;
 import co.com.ceiba.estacionamiento.exceptions.*;
 import co.com.ceiba.estacionamiento.models.Register;
 import co.com.ceiba.estacionamiento.repositories.IRegisterRepository;
@@ -41,6 +47,14 @@ public class Watchman implements IWatchman {
 	 */
 	public Watchman(IRegisterRepository vehicleRepository) {
 		this.vehicleRepository = vehicleRepository;
+	}
+	
+	public List<Register> getRegisterList(){
+		List<RegisterEntity> listEntity = new ArrayList<>();
+		listEntity = (List<RegisterEntity>) vehicleRepository.findAll();
+		if(listEntity != null)
+		return ConvertMTE.convertEntityToModelList(listEntity);
+		return null;
 	}
 
 	/**
