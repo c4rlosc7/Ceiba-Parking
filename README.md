@@ -21,7 +21,7 @@ $ git branch -l // lista de ramas creadas en el repo
 ```console
 $ git checkout develop // ubicarnos en la rama develop
 
-git flow feature start feature_git_flow_summary // creando nueva feature
+$ git flow feature start feature_git_flow_summary // creando nueva feature
 
 $ git checkout develop // ubicarnos en la rama develop
 
